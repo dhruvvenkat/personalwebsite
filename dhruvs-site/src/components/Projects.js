@@ -5,8 +5,11 @@ const Projects = () => {
   const projects = [
     {
       title: "EscrowShield",
-      description:
-        "Developed a proof-of-concept web application to hold down payments in escrow on the blockchain for buyers of new properties, eliminating the cost of third-party escrows and notaries. Learned and applied the Internet Computer blockchain to write self-validating smart contracts stored in ICP canisters.",
+      description: [
+        "Developed a proof-of-concept web application to hold down payments in escrow on the blockchain for buyers of new properties",
+        "Eliminated the cost of third-party escrows and notaries",
+        "Learned and applied the Internet Computer blockchain to write self-validating smart contracts stored in ICP canisters",
+      ],
       image: "https://via.placeholder.com/400x250",
       technologies: ["ReactJS", "Internet Computer", "Motoko", "MetaMask API"],
       github: "https://github.com/dhruvvenkat/escrowshield",
@@ -14,8 +17,11 @@ const Projects = () => {
     },
     {
       title: "StockWatcher",
-      description:
-        "Developed a CRUD application using Java HTTP client to auto-update users' watchlists every 5 minutes. Users can add and remove stocks from their watchlist or export their watchlist as a CSV file. Used Java Swing to develop an intuitive API with buttons, headers, and graphics.",
+      description: [
+        "Developed a CRUD application using Java HTTP client to auto-update users' watchlists every 5 minutes",
+        "Implemented features for users to add/remove stocks from their watchlist or export as CSV file",
+        "Used Java Swing to develop an intuitive API with buttons, headers, and graphics",
+      ],
       image: "https://via.placeholder.com/400x250",
       technologies: [
         "Java",
@@ -24,6 +30,26 @@ const Projects = () => {
         "Finnhub API",
       ],
       github: "https://github.com/dhruvvenkat/stockwatcher",
+      live: "#",
+    },
+    {
+      title: "Personal Portfolio",
+      description: [
+        "Designed and developed a modern portfolio website with a dark theme and interactive elements",
+        "Implemented smooth animations and responsive design for all screen sizes",
+        "Created a clean user interface with sections for projects, experience, and contact information",
+      ],
+      image: "https://via.placeholder.com/400x250",
+      technologies: [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "ReactJS",
+        "Git",
+        // "Responsive Design",
+        // "CSS Animations",
+      ],
+      github: "https://github.com/dhruvvenkat/portfolio",
       live: "#",
     },
   ];
@@ -58,7 +84,11 @@ const Projects = () => {
               </div>
               <div className="project-content">
                 <h3 className="project-title">{project.title}</h3>
-                <p className="project-description">{project.description}</p>
+                <ul className="project-description">
+                  {project.description.map((bullet, bulletIndex) => (
+                    <li key={bulletIndex}>{bullet}</li>
+                  ))}
+                </ul>
                 <div className="project-technologies">
                   {project.technologies.map((tech, techIndex) => (
                     <span className="tech-tag" key={techIndex}>
