@@ -50,11 +50,18 @@
   font-size: 1.25rem;
   color: #a0a0a0;
   margin-bottom: 2rem;
+  line-height: 1.8;
+}
+
+.highlight {
+  color: #00ff9d;
+  font-weight: 500;
 }
 
 .hero-buttons {
   display: flex;
   gap: 1rem;
+  justify-content: center;
 }
 
 .cta-button {
@@ -138,5 +145,30 @@
   100% {
     transform: translateY(20px);
     opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .name {
+    font-size: 4rem;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .geometric-shape {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
   }
 }

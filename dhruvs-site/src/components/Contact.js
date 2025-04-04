@@ -10,32 +10,38 @@ const Contact = () => {
           <div className="contact-info">
             <h3>Let's Connect</h3>
             <p>
-              I'm always open to discussing new projects, creative ideas or
-              opportunities to be part of your visions.
+              I'm currently seeking internship opportunities for Fall 2025. Feel
+              free to reach out if you'd like to discuss potential
+              collaborations or just want to connect!
             </p>
             <div className="contact-details">
               <div className="contact-item">
                 <i className="fas fa-envelope"></i>
-                <span>email@example.com</span>
+                <span>dvenkat@uwaterloo.ca</span>
               </div>
               <div className="contact-item">
                 <i className="fas fa-phone"></i>
-                <span>+1 234 567 890</span>
+                <span>(548)-883-0423</span>
               </div>
               <div className="contact-item">
                 <i className="fas fa-map-marker-alt"></i>
-                <span>New York, USA</span>
+                <span>Waterloo, ON, Canada</span>
               </div>
             </div>
             <div className="social-links">
-              <a href="#" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://github.com/dhruvvenkat"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <i className="fab fa-github"></i>
               </a>
-              <a href="#" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://linkedin.com/in/dhruv-venkat"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <i className="fab fa-linkedin"></i>
-              </a>
-              <a href="#" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-twitter"></i>
               </a>
             </div>
           </div>

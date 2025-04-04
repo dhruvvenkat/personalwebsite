@@ -4,28 +4,20 @@ import "../styles/Experience.css";
 const Experience = () => {
   const experiences = [
     {
-      title: "Software Engineer",
-      company: "Tech Company",
-      period: "2022 - Present",
+      title: "Platform Engineering (DevOps) Intern",
+      company: "Tangerine Bank",
+      period: "Jan. 2025 - Present",
       description:
-        "Led development of multiple web applications using React and Node.js. Implemented CI/CD pipelines and improved application performance by 40%.",
-      skills: ["React", "Node.js", "AWS", "Docker"],
+        "Developed Python scripts to scan hundreds of GitHub repositories for vulnerabilities, supporting 100+ staff members. Tested and troubleshot code from end-to-end using both single- and multi-branch Jenkins pipelines. Created an institution-wide license management system for GitHub Copilot to monitor and optimize monthly expenses based on developer usage.",
+      skills: ["Python", "Jenkins", "GitHub", "DevOps"],
     },
     {
-      title: "Frontend Developer",
-      company: "Startup Inc",
-      period: "2020 - 2022",
+      title: "Coding Instructor",
+      company: "Sensei",
+      period: "Jan. - Aug. 2024",
       description:
-        "Developed and maintained responsive web applications. Collaborated with design team to implement pixel-perfect UIs.",
-      skills: ["JavaScript", "HTML/CSS", "React", "Redux"],
-    },
-    {
-      title: "Junior Developer",
-      company: "Digital Agency",
-      period: "2019 - 2020",
-      description:
-        "Worked on various client projects, focusing on frontend development and user experience improvements.",
-      skills: ["HTML/CSS", "JavaScript", "jQuery", "Bootstrap"],
+        "Worked with over 50 children from ages 5-15 to teach basic concepts related to Lua, JavaScript, and C#. Collaborated with other employees to implement an in-house currency system for students to be rewarded for their learning progression. Utilized sales skills to 'pitch' the program to prospective customers and helped bring in over 20 new students.",
+      skills: ["Teaching", "Lua", "JavaScript", "C#"],
     },
   ];
 

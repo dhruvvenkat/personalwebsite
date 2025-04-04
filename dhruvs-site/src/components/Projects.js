@@ -4,30 +4,26 @@ import "../styles/Projects.css";
 const Projects = () => {
   const projects = [
     {
-      title: "E-commerce Platform",
+      title: "EscrowShield",
       description:
-        "A full-stack e-commerce platform with real-time inventory management and payment processing.",
+        "Developed a proof-of-concept web application to hold down payments in escrow on the blockchain for buyers of new properties, eliminating the cost of third-party escrows and notaries. Learned and applied the Internet Computer blockchain to write self-validating smart contracts stored in ICP canisters.",
       image: "https://via.placeholder.com/400x250",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      github: "#",
+      technologies: ["ReactJS", "Internet Computer", "Motoko", "MetaMask API"],
+      github: "https://github.com/dhruvvenkat/escrowshield",
       live: "#",
     },
     {
-      title: "Task Management App",
+      title: "StockWatcher",
       description:
-        "A collaborative task management application with real-time updates and team features.",
+        "Developed a CRUD application using Java HTTP client to auto-update users' watchlists every 5 minutes. Users can add and remove stocks from their watchlist or export their watchlist as a CSV file. Used Java Swing to develop an intuitive API with buttons, headers, and graphics.",
       image: "https://via.placeholder.com/400x250",
-      technologies: ["React", "Firebase", "Redux", "Material-UI"],
-      github: "#",
-      live: "#",
-    },
-    {
-      title: "Weather Dashboard",
-      description:
-        "A weather application with location-based forecasts and interactive maps.",
-      image: "https://via.placeholder.com/400x250",
-      technologies: ["React", "OpenWeather API", "Chart.js", "Geolocation"],
-      github: "#",
+      technologies: [
+        "Java",
+        "Java Swing/FX",
+        "Java HTTP Client",
+        "Finnhub API",
+      ],
+      github: "https://github.com/dhruvvenkat/stockwatcher",
       live: "#",
     },
   ];

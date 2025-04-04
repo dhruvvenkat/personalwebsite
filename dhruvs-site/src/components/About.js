@@ -9,39 +9,46 @@ const About = () => {
         <div className="about-content">
           <div className="about-text">
             <p className="about-description">
-              I'm a passionate developer with a keen interest in creating
-              innovative digital solutions. My journey in technology began with
-              a curiosity for how things work, and it has evolved into a deep
-              love for building meaningful applications that make a difference.
+              I'm a competent software developer with industry experience in
+              C++, Python, Java, web development, and DevOps practices. As a
+              team player, I excel at working with challenging projects under
+              pressure, demonstrating strong communication and practiced
+              leadership skills.
             </p>
             <div className="skills">
-              <h3>Skills</h3>
+              <h3>Technical Proficiencies</h3>
               <div className="skills-grid">
                 <div className="skill-card">
-                  <h4>Frontend</h4>
+                  <h4>Languages</h4>
                   <ul>
-                    <li>React</li>
+                    <li>C/C++</li>
+                    <li>Java</li>
+                    <li>Python</li>
                     <li>JavaScript</li>
                     <li>HTML/CSS</li>
-                    <li>Tailwind</li>
-                  </ul>
-                </div>
-                <div className="skill-card">
-                  <h4>Backend</h4>
-                  <ul>
-                    <li>Node.js</li>
-                    <li>Python</li>
                     <li>SQL</li>
-                    <li>REST APIs</li>
                   </ul>
                 </div>
                 <div className="skill-card">
-                  <h4>Tools</h4>
+                  <h4>Libraries & Frameworks</h4>
+                  <ul>
+                    <li>ReactJS</li>
+                    <li>NextJS</li>
+                    <li>Pandas</li>
+                    <li>NumPy</li>
+                    <li>Matplotlib</li>
+                    <li>Scikit-learn</li>
+                  </ul>
+                </div>
+                <div className="skill-card">
+                  <h4>Tools & Technologies</h4>
                   <ul>
                     <li>Git</li>
-                    <li>VS Code</li>
+                    <li>GitHub</li>
+                    <li>Jenkins</li>
+                    <li>MySQL</li>
+                    <li>Jupyter Notebook</li>
                     <li>Figma</li>
-                    <li>Docker</li>
                   </ul>
                 </div>
               </div>
