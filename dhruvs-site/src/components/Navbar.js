@@ -21,7 +21,9 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <div className="logo">DV</div>
+        <a href="#home" onClick={handleClick} className="logo">
+          <img src="/dvlogo.png" alt="DV Logo" />
+        </a>
         <ul className="nav-links">
           <li>
             <a href="#about" onClick={handleClick}>
