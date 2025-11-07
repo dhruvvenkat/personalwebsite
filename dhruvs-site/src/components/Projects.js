@@ -10,7 +10,7 @@ const Projects = () => {
         "Eliminated the cost of third-party escrows and notaries",
         "Learned and applied the Internet Computer blockchain to write self-validating smart contracts stored in ICP canisters",
       ],
-      image: "https://via.placeholder.com/400x250",
+      image: "/escrowshield.png",
       technologies: ["ReactJS", "Internet Computer", "Motoko", "MetaMask API"],
       github: "https://github.com/dhruvvenkat/escrowshield",
       live: "#",
@@ -22,7 +22,7 @@ const Projects = () => {
         "Implemented features for users to add/remove stocks from their watchlist or export as CSV file",
         "Used Java Swing to develop an intuitive API with buttons, headers, and graphics",
       ],
-      image: "https://via.placeholder.com/400x250",
+      image: "/stockwatcher.png",
       technologies: [
         "Java",
         "Java Swing/FX",
@@ -39,7 +39,7 @@ const Projects = () => {
         "Implemented smooth animations and responsive design for all screen sizes",
         "Created a clean user interface with sections for projects, experience, and contact information",
       ],
-      image: "https://via.placeholder.com/400x250",
+      image: "/React-icon.svg.png",
       technologies: [
         "HTML5",
         "CSS3",

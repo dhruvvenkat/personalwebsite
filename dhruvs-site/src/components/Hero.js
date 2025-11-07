@@ -15,7 +15,7 @@ const Hero = () => {
             Computer Engineering Student @ University of Waterloo
             <br />
             <span className="highlight">
-              Currently seeking Fall 2025 internships
+              Currently seeking Summer 2026 internships
             </span>
           </p>
           <div className="hero-buttons">
