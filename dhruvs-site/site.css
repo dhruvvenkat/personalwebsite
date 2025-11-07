@@ -6,3 +6,13 @@ html {
 a {
     color: greenyellow
 }
+
+.text {
+    text-align: center;
+}
+
+#dhruv-venkat-pic {
+    width: 10%;
+    height: auto;
+    
+}
