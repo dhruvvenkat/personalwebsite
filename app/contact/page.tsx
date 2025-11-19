@@ -41,7 +41,7 @@ export default function Contact() {
           >
             <h1 className="text-5xl md:text-6xl font-bold mb-4">Get in Touch</h1>
             <p className="text-xl text-muted-foreground">
-              Let's connect and build something amazing together
+              Let&apos;s connect and build something amazing together
             </p>
           </motion.div>
 
@@ -111,7 +111,7 @@ export default function Contact() {
               <CardHeader>
                 <CardTitle>Send a Message</CardTitle>
                 <CardDescription>
-                  Fill out the form below and I'll get back to you as soon as possible.
+                  Fill out the form below and I&apos;ll get back to you as soon as possible.
                 </CardDescription>
               </CardHeader>
               <CardContent>

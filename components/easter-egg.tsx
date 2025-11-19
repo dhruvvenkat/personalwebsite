@@ -49,7 +49,7 @@ export function EasterEgg() {
             <DialogHeader>
               <DialogTitle>🦢 Go Waterloo! 🦢</DialogTitle>
               <DialogDescription>
-                You found the Easter egg! Here's a special message for you.
+                You found the Easter egg! Here&apos;s a special message for you.
               </DialogDescription>
             </DialogHeader>
             <div className="py-4">

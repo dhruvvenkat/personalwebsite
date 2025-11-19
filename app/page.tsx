@@ -160,11 +160,11 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  I'm a Computer Engineering student at the University of Waterloo, 
+                  I&apos;m a Computer Engineering student at the University of Waterloo, 
                   passionate about building innovative solutions and learning new technologies. 
                   Currently working as a Software Engineering Intern at Scotiabank, I love 
                   working on projects that solve real-world problems and push the boundaries 
-                  of what's possible.
+                  of what&apos;s possible.
                 </p>
                 <Link href="/about">
                   <Button variant="ghost" className="group">
