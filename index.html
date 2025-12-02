@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dhruv Venkat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #111;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+        }
+
+        .line-container {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            margin: 60px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: #00ff00;
+            opacity: 0.3;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .section-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #00ff00;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 4;
+            opacity: 0.6;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: auto;
+        }
+
+        .section-dot:hover {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.3);
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        .section-dot.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.5);
+            box-shadow: 0 0 15px #00ff00;
+        }
+
+        .walking-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #00ff00;
+            border-radius: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 3;
+            box-shadow: 0 0 20px #00ff00;
+            animation: pulse 2s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 20px #00ff00;
+            }
+            50% {
+                box-shadow: 0 0 30px #00ff00, 0 0 40px #00ff00;
+            }
+        }
+
+        .section-labels {
+            position: absolute;
+            width: 100%;
+            top: -30px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .section-label {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .content-area {
+            margin-top: 40px;
+            min-height: 400px;
+            padding: 30px;
+            background-color: #000;
+            border: 1px solid #00ff00;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            position: relative;
+        }
+
+        .content-area.visible {
+            opacity: 1;
+        }
+
+        .terminal-content {
+            font-size: 14px;
+            line-height: 1.8;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .typing-line {
+            white-space: normal;
+            word-break: break-word;
+            margin-bottom: 10px;
+            width: 100%;
+            display: block;
+        }
+
+        .terminal-content a {
+            color: #00ff00;
+            text-decoration: underline;
+            transition: opacity 0.3s ease;
+        }
+
+        .terminal-content a:hover {
+            opacity: 0.7;
+        }
+
+        .terminal-content strong {
+            font-weight: bold;
+            color: #00ff00;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background-color: #00ff00;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 49% {
+                opacity: 1;
+            }
+            50%, 100% {
+                opacity: 0;
+            }
+        }
+
+        .typing-line {
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            color: #00ff00;
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .name-header {
+            text-align: center;
+            font-size: 32px;
+            letter-spacing: 8px;
+            margin-bottom: 80px;
+            color: #00ff00;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="name-header">DHRUV VENKAT</h1>
+        <div class="line-container">
+            <div class="line"></div>
+            <div class="section-labels">
+                <span class="section-label">About</span>
+                <span class="section-label">Skills</span>
+                <span class="section-label">Resume</span>
+                <span class="section-label">Contact</span>
+                <span class="section-label">Projects</span>
+            </div>
+            <div class="section-dot" data-section="about" style="left: 0%;"></div>
+            <div class="section-dot" data-section="skills" style="left: 25%;"></div>
+            <div class="section-dot" data-section="resume" style="left: 50%;"></div>
+            <div class="section-dot" data-section="contact" style="left: 75%;"></div>
+            <div class="section-dot" data-section="blog" style="left: 100%;"></div>
+            <div class="walking-dot" id="walkingDot" style="left: 0%;"></div>
+        </div>
+
+        <div class="content-area" id="contentArea">
+            <div class="terminal-content" id="terminalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        const sections = {
+            about: [
+                "> INITIALIZING USER PROFILE...",
+                "> NAME: DHRUV VENKAT",
+                "> ROLE: SOFTWARE ENGINEERING INTERN",
+                "> LOCATION: WATERLOO, ON / TORONTO, ON",
+                "> STATUS: AVAILABLE FOR SUMMER 2026 OPPORTUNITIES",
+                "",
+                { text: "> ABOUT:", isBold: true },
+                "> COMPUTER ENGINEERING STUDENT AT UNIVERSITY OF WATERLOO WITH PASSION FOR BUILDING SCALABLE SYSTEMS, AI-DRIVEN SOLUTIONS, AND ENTERPRISE SOFTWARE DEVELOPMENT.",
+                "",
+                "> CURRENTLY WORKING AT SCOTIABANK, MODERNIZING LEGACY SYSTEMS AND DEVELOPING AI-POWERED TOOLS TO IMPROVE DEVELOPER PRODUCTIVITY.",
+                "",
+                "> SYSTEM READY."
+            ],
+            skills: [
+                "> SCANNING SKILL SET...",
+                "",
+                { text: "> PROGRAMMING LANGUAGES:", isBold: true },
+                ">   - Embedded C, C++, Java, Python",
+                ">   - HTML/CSS, TypeScript, Apache Groovy",
+                ">   - VHDL, SQL, R, XML",
+                "",
+                { text: "> LIBRARIES & FRAMEWORKS:", isBold: true },
+                ">   - ReactJS, Three.JS, Django",
+                ">   - Jest, JUnit 5, scikit-learn",
+                ">   - Pandas, NumPy, Matplotlib",
+                "",
+                { text: "> CLOUD TECHNOLOGIES:", isBold: true },
+                ">   - AWS (EC2, S3, IAM, RDS, Lambda, DynamoDB)",
+                "",
+                { text: "> DEVELOPER TOOLS & DATABASES:", isBold: true },
+                ">   - Git, GitHub, Jenkins, Postman",
+                ">   - MySQL, Redis, Gradle, Maven, Artifactory",
+                "",
+                "> SKILLS LOADED."
+            ],
+            resume: [
+                { text: "> ACCESSING RESUME DATABASE (CLICK HERE FOR FULL RESUME)...", isLink: true, href: "resume_nonww-3.pdf" },
+                "",
+                { text: "> EDUCATION:", isBold: true },
+                "",
+                ">   UNIVERSITY OF WATERLOO",
+                ">   BACHELOR OF APPLIED SCIENCE IN COMPUTER ENGINEERING (HONOURS)",
+                ">   EXPECTED GRADUATION: 2029",
+                "",
+                { text: "> PROFESSIONAL EXPERIENCE:", isBold: true },
+                "",
+                { text: ">   SOFTWARE ENGINEERING INTERN", isBold: true },
+                ">   SCOTIABANK | SEP. 2025 - PRESENT",
+                ">   - MODERNIZED 8 ENTERPRISE APPLICATIONS UPGRADING FROM JAVA 11/17 TO JAVA 21",
+                ">   - MONITORED & REMEDIATED 100+ SECURITY VULNERABILITIES ACROSS 3 REPOSITORIES",
+                ">   - DEVELOPED AI-POWERED AGENTS FOR REQUIREMENTS EXTRACTION",
+                ">   - BUILT TESSERACT OCR & AI TOOL REDUCING COMPLIANCE REVIEW EFFORT BY 60%",
+                "",
+                { text: ">   PLATFORM ENGINEERING (DEVOPS) INTERN", isBold: true },
+                ">   TANGERINE | JAN. - APR. 2025",
+                ">   - DEVELOPED PYTHON SCRIPTS TO SCAN 100+ GITHUB REPOS FOR VULNERABILITIES",
+                ">   - DESIGNED & MAINTAINED 5 JENKINS CI/CD PIPELINES FOR SCALE DEPLOYMENT",
+                ">   - CREATED GITHUB COPILOT LICENSE TRACKER SAVING $1000+ PER MONTH",
+                "",
+                "> RESUME DATA RETRIEVED."
+            ],
+            contact: [
+                "> ESTABLISHING CONNECTION...",
+                "",
+                "> PHONE: (548)-883-0423",
+                { text: "> EMAIL: dhruv.venkat.2024@gmail.com", isLink: true, href: "mailto:dhruv.venkat.2024@gmail.com" },
+                { text: "> WEBSITE: dhruvvenkat.com", isLink: true, href: "https://dhruvvenkat.com" },
+                { text: "> LINKEDIN: linkedin.com/in/dhruv-venkat", isLink: true, href: "https://linkedin.com/in/dhruv-venkat" },
+                { text: "> GITHUB: github.com/dhruvvenkat", isLink: true, href: "https://github.com/dhruvvenkat" },
+                "",
+                "> CONNECTION ESTABLISHED.",
+                "> AWAITING RESPONSE..."
+            ],
+            blog: [
+                "> LOADING PROJECT PORTFOLIO...",
+                "",
+                { text: "> RECENT PROJECTS:", isBold: true },
+                "",
+                ">   REVVO (HACKPRINCETON 2025)",
+                ">   - WEB APP FOR USED CAR LISTINGS WITH",
+                ">     AI-POWERED ANALYTICS & CHATBOT",
+                ">   - REACTJS + VITE, PYTHON, DJANGO, FIREBASE",
+                "",
+                ">   FINXpert (UW FINTECH CLUB)",
+                ">   - BANKING INSTITUTION ADVISOR USING",
+                ">     K-NEAREST NEIGHBOR ALGORITHM",
+                ">   - REACTJS, PYTHON, MYSQL, MACHINE LEARNING",
+                "",
+                ">   MONTE CARLO OPTIONS PRICING",
+                ">   - SIMULATOR WITH 10,000+ SIMULATIONS",
+                ">   - PYTHON, MATPLOTLIB, PANDAS, FINAZON API",
+                "",
+                ">   ESCROWSHIELD",
+                ">   - BLOCKCHAIN ESCROW FOR PROPERTY",
+                ">     DOWN PAYMENTS",
+                ">   - REACTJS, INTERNET COMPUTER, RUST, MOTOKO",
+                "",
+                "> PORTFOLIO LOADED."
+            ]
+        };
+
+        const sectionPositions = [0, 25, 50, 75, 100];
+        const sectionNames = ['about', 'skills', 'resume', 'contact', 'blog'];
+        let currentSectionIndex = 0;
+        let isTyping = false;
+        let typingTimeouts = [];
+        let visitedSections = new Set();
+
+        const walkingDot = document.getElementById('walkingDot');
+        const contentArea = document.getElementById('contentArea');
+        const terminalContent = document.getElementById('terminalContent');
+        const sectionDots = document.querySelectorAll('.section-dot');
+
+        function updateWalkingDot(position) {
+            walkingDot.style.left = position + '%';
+        }
+
+        function updateActiveSection(index) {
+            sectionDots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function typeText(textArray, sectionName, callback) {
+            // Clear any existing typing timeouts
+            typingTimeouts.forEach(timeout => clearTimeout(timeout));
+            typingTimeouts = [];
+            
+            isTyping = true;
+            terminalContent.innerHTML = '';
+            contentArea.classList.remove('visible');
+            
+            // Check if section has been visited
+            const hasVisited = visitedSections.has(sectionName);
+            
+            // If visited, display all text immediately
+            if (hasVisited) {
+                setTimeout(() => {
+                    contentArea.classList.add('visible');
+                    textArray.forEach((line, index) => {
+                        terminalContent.innerHTML += '<div class="typing-line">';
+                        const lastLine = terminalContent.querySelector('.typing-line:last-child');
+                        
+                        if (typeof line === 'object' && line.isLink) {
+                            const targetAttr = line.href.startsWith('mailto:') ? '' : ' target="_blank"';
+                            lastLine.innerHTML = `<a href="${line.href}"${targetAttr}>${line.text}</a>`;
+                        } else if (typeof line === 'object' && line.isBold) {
+                            lastLine.innerHTML = `<strong>${line.text}</strong>`;
+                        } else if (typeof line === 'string') {
+                            lastLine.textContent = line;
+                        }
+                        
+                        if (index === textArray.length - 1) {
+                            lastLine.innerHTML += '<span class="cursor"></span>';
+                        }
+                        terminalContent.innerHTML += '</div>';
+                    });
+                    isTyping = false;
+                    if (callback) callback();
+                }, 200);
+                return;
+            }
+            
+            // If not visited, use typing animation
+            // Mark as visited immediately so if user navigates away and comes back, it displays instantly
+            visitedSections.add(sectionName);
+            
+            const initialTimeout = setTimeout(() => {
+                contentArea.classList.add('visible');
+                let lineIndex = 0;
+                let charIndex = 0;
+                
+                function typeChar() {
+                    if (lineIndex >= textArray.length) {
+                        isTyping = false;
+                        typingTimeouts = [];
+                        visitedSections.add(sectionName);
+                        if (callback) callback();
+                        return;
+                    }
+                    
+                    const currentLine = textArray[lineIndex];
+                    
+                    // Handle link objects
+                    if (typeof currentLine === 'object' && currentLine.isLink) {
+                        const lineText = currentLine.text;
+                        const targetAttr = currentLine.href.startsWith('mailto:') ? '' : ' target="_blank"';
+                        
+                        if (charIndex === 0) {
+                            terminalContent.innerHTML += '<div class="typing-line">';
+                        }
+                        
+                        if (charIndex < lineText.length) {
+                            const linkText = lineText.substring(0, charIndex + 1);
+                            terminalContent.querySelector('.typing-line:last-child').innerHTML = 
+                                `<a href="${currentLine.href}"${targetAttr}>${linkText}</a>`;
+                            charIndex++;
+                            const timeout = setTimeout(typeChar, 30);
+                            typingTimeouts.push(timeout);
+                        } else {
+                            terminalContent.querySelector('.typing-line:last-child').innerHTML = 
+                                `<a href="${currentLine.href}"${targetAttr}>${lineText}</a><span class="cursor"></span>`;
+                            terminalContent.innerHTML += '</div>';
+                            lineIndex++;
+                            charIndex = 0;
+                            const timeout = setTimeout(typeChar, 100);
+                            typingTimeouts.push(timeout);
+                        }
+                        return;
+                    }
+                    
+                    // Handle bold text objects
+                    if (typeof currentLine === 'object' && currentLine.isBold) {
+                        const lineText = currentLine.text;
+                        if (charIndex === 0) {
+                            terminalContent.innerHTML += '<div class="typing-line">';
+                        }
+                        
+                        if (charIndex < lineText.length) {
+                            const boldText = lineText.substring(0, charIndex + 1);
+                            terminalContent.querySelector('.typing-line:last-child').innerHTML = 
+                                `<strong>${boldText}</strong>`;
+                            charIndex++;
+                            const timeout = setTimeout(typeChar, 30);
+                            typingTimeouts.push(timeout);
+                        } else {
+                            terminalContent.querySelector('.typing-line:last-child').innerHTML = 
+                                `<strong>${lineText}</strong><span class="cursor"></span>`;
+                            terminalContent.innerHTML += '</div>';
+                            lineIndex++;
+                            charIndex = 0;
+                            const timeout = setTimeout(typeChar, 100);
+                            typingTimeouts.push(timeout);
+                        }
+                        return;
+                    }
+                    
+                    // Handle regular strings
+                    const lineText = typeof currentLine === 'string' ? currentLine : currentLine.text;
+                    
+                    if (charIndex === 0) {
+                        terminalContent.innerHTML += '<div class="typing-line">';
+                    }
+                    
+                    if (charIndex < lineText.length) {
+                        terminalContent.querySelector('.typing-line:last-child').textContent = 
+                            lineText.substring(0, charIndex + 1);
+                        charIndex++;
+                        const timeout = setTimeout(typeChar, 30);
+                        typingTimeouts.push(timeout);
+                    } else {
+                        terminalContent.querySelector('.typing-line:last-child').innerHTML += 
+                            '<span class="cursor"></span>';
+                        terminalContent.innerHTML += '</div>';
+                        lineIndex++;
+                        charIndex = 0;
+                        const timeout = setTimeout(typeChar, 100);
+                        typingTimeouts.push(timeout);
+                    }
+                }
+                
+                typeChar();
+            }, 200);
+            typingTimeouts.push(initialTimeout);
+        }
+
+        function showSection(index) {
+            if (index < 0 || index >= sectionNames.length) return;
+            currentSectionIndex = index;
+            const sectionName = sectionNames[index];
+            updateWalkingDot(sectionPositions[index]);
+            updateActiveSection(index);
+            typeText(sections[sectionName], sectionName);
+        }
+
+        sectionDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSection(index);
+            });
+            
+            dot.addEventListener('mouseenter', () => {
+                if (!isTyping) {
+                    const sectionName = dot.getAttribute('data-section');
+                    const sectionIndex = sectionNames.indexOf(sectionName);
+                    updateWalkingDot(sectionPositions[sectionIndex]);
+                }
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                e.preventDefault();
+                let newIndex = currentSectionIndex;
+                
+                if (e.key === 'ArrowLeft') {
+                    newIndex = Math.max(0, currentSectionIndex - 1);
+                } else {
+                    newIndex = Math.min(sectionNames.length - 1, currentSectionIndex + 1);
+                }
+                
+                if (newIndex !== currentSectionIndex) {
+                    showSection(newIndex);
+                }
+            }
+        });
+
+        showSection(0);
+    </script>
+</body>
+</html>
+
