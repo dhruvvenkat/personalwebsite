@@ -543,6 +543,19 @@
         }
 
         @media (max-width: 768px) {
+            .resume-button {
+                right: 10px;
+                top: 60px;
+                font-size: 11px;
+                padding: 6px 12px;
+                animation: resumeGlow 2s ease-in-out infinite;
+            }
+
+            .theme-toggle {
+                right: 10px;
+                top: 20px;
+            }
+
             #assistant {
                 bottom: 90px;
                 right: 5%;
@@ -592,10 +605,9 @@
             transition: color 0.3s ease;
         }
 
-        .theme-toggle {
+        .theme-toggle, .resume-button {
             position: fixed;
             top: 20px;
-            right: 20px;
             background-color: transparent;
             border: 1px solid var(--border-color);
             color: var(--text-color);
@@ -608,12 +620,66 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .theme-toggle:hover {
+        .theme-toggle {
+            right: 20px;
+        }
+
+        .resume-button {
+            right: 140px;
+            border: 2px solid #00ff44;
+            box-shadow: 0 0 10px rgba(0, 255, 68, 0.5),
+                        0 0 20px rgba(0, 255, 68, 0.3),
+                        0 0 30px rgba(0, 255, 68, 0.2);
+            animation: resumeGlow 2s ease-in-out infinite;
+            font-weight: bold;
+            background-color: rgba(0, 255, 68, 0.1);
+        }
+
+        @keyframes resumeGlow {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(0, 255, 68, 0.5),
+                            0 0 20px rgba(0, 255, 68, 0.3),
+                            0 0 30px rgba(0, 255, 68, 0.2);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(0, 255, 68, 0.8),
+                            0 0 30px rgba(0, 255, 68, 0.6),
+                            0 0 40px rgba(0, 255, 68, 0.4),
+                            0 0 50px rgba(0, 255, 68, 0.2);
+                transform: scale(1.05);
+            }
+        }
+
+        .theme-toggle:hover, .resume-button:hover {
             background-color: var(--text-color);
             color: var(--bg-color);
             opacity: 0.9;
+        }
+
+        .resume-button:hover {
+            animation: resumeGlowHover 0.5s ease-in-out infinite;
+            background-color: rgba(0, 255, 68, 0.2);
+            transform: scale(1.1);
+        }
+
+        @keyframes resumeGlowHover {
+            0%, 100% {
+                box-shadow: 0 0 25px rgba(0, 255, 68, 1),
+                            0 0 40px rgba(0, 255, 68, 0.8),
+                            0 0 60px rgba(0, 255, 68, 0.6),
+                            0 0 80px rgba(0, 255, 68, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 35px rgba(0, 255, 68, 1),
+                            0 0 50px rgba(0, 255, 68, 0.9),
+                            0 0 70px rgba(0, 255, 68, 0.7),
+                            0 0 90px rgba(0, 255, 68, 0.5);
+            }
         }
 
         /* Boot Sequence */
@@ -673,6 +739,7 @@
         <div class="boot-content" id="bootContent"></div>
     </div>
     <div class="main-content" id="mainContent">
+    <a href="resume_nonww-3.pdf" target="_blank" class="resume-button">Check Out My Resume!</a>
     <button class="theme-toggle" id="themeToggle">LIGHT</button>
     <div class="container">
         <h1 class="name-header">DHRUV VENKAT</h1>
@@ -1034,14 +1101,9 @@
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
         
-        // Load saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
-            body.classList.add('light-theme');
-            themeToggle.textContent = 'DARK';
-        } else {
-            themeToggle.textContent = 'LIGHT';
-        }
+        // Always default to light theme
+        body.classList.add('light-theme');
+        themeToggle.textContent = 'DARK';
         
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('light-theme');
