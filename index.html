@@ -1376,6 +1376,53 @@ ${JSON.stringify(dhruvMemory, null, 2)}`;
             scrollToBottom();
         }
 
+        // Function to create a streaming message container
+        function createStreamingMessage() {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message assistant';
+            messageDiv.id = 'streaming-message';
+            const contentDiv = document.createElement('div');
+            contentDiv.id = 'streaming-content';
+            messageDiv.appendChild(contentDiv);
+            chatOutput.appendChild(messageDiv);
+            scrollToBottom();
+            return contentDiv;
+        }
+
+        // Throttled update function for streaming
+        let updateTimeout = null;
+        let pendingText = '';
+        
+        function updateStreamingMessage(text) {
+            pendingText = text;
+            
+            // Clear existing timeout
+            if (updateTimeout) {
+                clearTimeout(updateTimeout);
+            }
+            
+            // Throttle updates to every 80ms for smoother, slower display
+            updateTimeout = setTimeout(() => {
+                const contentDiv = document.getElementById('streaming-content');
+                if (contentDiv) {
+                    // Parse markdown for the accumulated text
+                    contentDiv.innerHTML = parseMarkdown(pendingText);
+                    scrollToBottom();
+                }
+                pendingText = '';
+            }, 80);
+        }
+
+        // Function to finalize streaming message
+        function finalizeStreamingMessage() {
+            const messageDiv = document.getElementById('streaming-message');
+            const contentDiv = document.getElementById('streaming-content');
+            if (messageDiv && contentDiv) {
+                messageDiv.removeAttribute('id');
+                contentDiv.removeAttribute('id');
+            }
+        }
+
         // Function to add loading indicator
         function addLoading() {
             const loadingDiv = document.createElement('div');
@@ -1406,12 +1453,12 @@ ${JSON.stringify(dhruvMemory, null, 2)}`;
             return div.innerHTML;
         }
 
-        // Main function to ask the AI assistant
+        // Main function to ask the AI assistant with streaming
         async function askDhruvBot(prompt) {
             try {
-                addLoading();
+                removeLoading(); // Remove any existing loading indicator
                 
-                // Call Groq API
+                // Call Groq API with streaming
                 // NOTE: For production, use a backend proxy to protect your API key
                 // Exposing API keys in client-side code is a security risk
                 // Get API key from environment variable or replace with your Groq API key
@@ -1430,30 +1477,116 @@ ${JSON.stringify(dhruvMemory, null, 2)}`;
                             { role: 'user', content: prompt }
                         ],
                         temperature: 0.2,
-                        max_tokens: 512
+                        max_tokens: 512,
+                        stream: true
                     })
                 });
 
-                const data = await response.json();
-                
                 if (!response.ok) {
-                    const errorMessage = data.error?.message || data.message || `HTTP ${response.status}`;
-                    console.error('Groq API Error:', data);
+                    const errorData = await response.json().catch(() => ({}));
+                    const errorMessage = errorData.error?.message || errorData.message || `HTTP ${response.status}`;
+                    console.error('Groq API Error:', errorData);
                     throw new Error(errorMessage);
                 }
 
-                removeLoading();
-                
-                if (data.choices && data.choices[0] && data.choices[0].message) {
-                    return data.choices[0].message.content.trim();
-                } else {
-                    throw new Error('Invalid response format');
+                // Create streaming message container
+                const contentDiv = createStreamingMessage();
+                let accumulatedText = '';
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+
+                // Read the stream
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    const chunk = decoder.decode(value, { stream: true });
+                    buffer += chunk;
+                    const lines = buffer.split('\n');
+                    
+                    // Keep the last incomplete line in buffer
+                    buffer = lines.pop() || '';
+
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const data = line.slice(6);
+                            if (data === '[DONE]') {
+                                // Final update with all text
+                                if (updateTimeout) {
+                                    clearTimeout(updateTimeout);
+                                }
+                                const finalContentDiv = document.getElementById('streaming-content');
+                                if (finalContentDiv) {
+                                    finalContentDiv.innerHTML = parseMarkdown(accumulatedText);
+                                    scrollToBottom();
+                                }
+                                finalizeStreamingMessage();
+                                return accumulatedText.trim();
+                            }
+
+                            try {
+                                const json = JSON.parse(data);
+                                const delta = json.choices?.[0]?.delta?.content;
+                                if (delta) {
+                                    accumulatedText += delta;
+                                    // Throttled update (handled by updateStreamingMessage)
+                                    updateStreamingMessage(accumulatedText);
+                                }
+                            } catch (e) {
+                                // Skip invalid JSON lines
+                                continue;
+                            }
+                        }
+                    }
+                    
+                    // Small delay to slow down stream processing
+                    await new Promise(resolve => setTimeout(resolve, 20));
                 }
+                
+                // Process any remaining buffer
+                if (buffer.trim()) {
+                    const lines = buffer.split('\n');
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const data = line.slice(6);
+                            if (data !== '[DONE]') {
+                                try {
+                                    const json = JSON.parse(data);
+                                    const delta = json.choices?.[0]?.delta?.content;
+                                    if (delta) {
+                                        accumulatedText += delta;
+                                    }
+                                } catch (e) {
+                                    // Skip invalid JSON
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                // Final update
+                if (updateTimeout) {
+                    clearTimeout(updateTimeout);
+                }
+                const finalContentDiv = document.getElementById('streaming-content');
+                if (finalContentDiv) {
+                    finalContentDiv.innerHTML = parseMarkdown(accumulatedText);
+                    scrollToBottom();
+                }
+
+                finalizeStreamingMessage();
+                return accumulatedText.trim();
             } catch (error) {
+                // Clean up streaming message if it exists
+                const streamingMsg = document.getElementById('streaming-message');
+                if (streamingMsg) {
+                    streamingMsg.remove();
+                }
                 removeLoading();
                 console.error('Error calling Groq API:', error);
                 const errorMsg = error.message || 'Unknown error';
-                return `> ERROR: Unable to connect to VECTOR. ${errorMsg}. Please check your API key configuration.`;
+                addMessage(`> ERROR: Unable to connect to VECTOR. ${errorMsg}. Please check your API key configuration.`, false);
             }
         }
 
@@ -1467,11 +1600,8 @@ ${JSON.stringify(dhruvMemory, null, 2)}`;
                     // Add user message to chat
                     addMessage(userMessage, true);
                     
-                    // Get AI response
-                    const aiResponse = await askDhruvBot(userMessage);
-                    
-                    // Add AI response to chat
-                    addMessage(aiResponse, false);
+                    // Get AI response (streaming is handled inside askDhruvBot)
+                    await askDhruvBot(userMessage);
                 }
             });
         }
