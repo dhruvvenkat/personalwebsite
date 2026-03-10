@@ -67,7 +67,7 @@ export default function DhruvSystemsPortfolio() {
       icon: FaXTwitter,
     },
     { label: "email", href: "mailto:dvenkat@uwaterloo.ca" },
-    { label: "resume", href: "/dhruv-venkat-resume.pdf" },
+    { label: "résumé", href: "/dhruv-venkat-resume.pdf" },
   ] satisfies Array<{
     label: string;
     href: string;
