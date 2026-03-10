@@ -15,7 +15,7 @@ export default function NotesIndexPage() {
             href="/"
             className="mb-8 inline-flex text-[11px] uppercase tracking-[0.25em] text-zinc-500 transition hover:text-white"
           >
-            home
+            dhruv venkat
           </Link>
 
           <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
