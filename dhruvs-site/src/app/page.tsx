@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { IconType } from "react-icons";
+import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 
 import { AmbientBackground } from "./components/ambient-background";
 import { Panel } from "./components/panel";
@@ -49,12 +51,28 @@ export default function DhruvSystemsPortfolio() {
   ];
 
   const links = [
-    { label: "github", href: "https://github.com/dhruvvenkat" },
-    { label: "linkedin", href: "https://www.linkedin.com/in/dhruv-venkat/" },
-    { label: "x", href: "https://x.com/wakeupitsdhruv" },
+    {
+      label: "github",
+      href: "https://github.com/dhruvvenkat",
+      icon: FaGithub,
+    },
+    {
+      label: "linkedin",
+      href: "https://www.linkedin.com/in/dhruv-venkat/",
+      icon: FaLinkedinIn,
+    },
+    {
+      label: "x",
+      href: "https://x.com/wakeupitsdhruv",
+      icon: FaXTwitter,
+    },
     { label: "email", href: "mailto:dvenkat@uwaterloo.ca" },
     { label: "resume", href: "/dhruv-venkat-resume.pdf" },
-  ];
+  ] satisfies Array<{
+    label: string;
+    href: string;
+    icon?: IconType;
+  }>;
 
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-[#0b0d10] text-zinc-200 selection:bg-zinc-700 selection:text-white">
@@ -121,7 +139,7 @@ export default function DhruvSystemsPortfolio() {
                         width={14}
                         height={14}
                         aria-hidden="true"
-                        className="h-[14px] w-[14px] shrink-0 opacity-55"
+                        className="h-[14px] w-[14px] shrink-0 opacity-100"
                       />
                       <span>{exp.company}</span>
                     </span>
@@ -139,9 +157,16 @@ export default function DhruvSystemsPortfolio() {
                     href={link.href}
                     target="_blank"
                     rel="noreferrer"
+                    aria-label={link.label}
                     className="transition hover:text-white"
                   >
-                    {link.label}
+                    {link.icon ? (
+                      <span className="flex h-[18px] w-[18px] items-center justify-center text-[16px]">
+                        <link.icon aria-hidden="true" />
+                      </span>
+                    ) : (
+                      link.label
+                    )}
                   </a>
                 ))}
               </div>
