@@ -98,7 +98,7 @@ export default function DhruvSystemsPortfolio() {
                 make engineering work sharper.{" "}
                 <em>
                   <b>
-                    I&apos;m always open to new opportunities to meet cool people and
+                    i&apos;m always open to new opportunities to meet cool people and
                     build awesome stuff.
                   </b>
                 </em>
