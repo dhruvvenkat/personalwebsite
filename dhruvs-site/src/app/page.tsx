@@ -26,9 +26,9 @@ export default function DhruvSystemsPortfolio() {
   ];
 
   const projects = [
-    { name: "Spec2App", link: "#" },
-    { name: "AI Evolution Framework", link: "#" },
-    { name: "Taste Discovery", link: "#" },
+    { name: "BoilerBrain - automating boilerplate code generation with natural language", link: "https://github.com/dhruvvenkat/boilerbrain" },
+    { name: "AgentBench - agent evolution framework for the future", link: "https://github.com/dhruvvenkat/agentbench" },
+    { name: "LoadStar - deterministic API load simulator", link: "https://github.com/dhruvvenkat/loadstar" },
   ];
 
   const recentWriting = writing.slice(0, 3);
