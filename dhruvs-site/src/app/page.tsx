@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 
+import { AmbientBackground } from "./components/ambient-background";
 import { Panel } from "./components/panel";
-import { writing } from "./site-data";
+import { formatNoteDate, notes } from "./data/notes";
 
 type InfoRowProps = {
   label: string;
@@ -31,11 +33,19 @@ export default function DhruvSystemsPortfolio() {
     { name: "LoadStar - deterministic API load simulator", link: "https://github.com/dhruvvenkat/loadstar" },
   ];
 
-  const recentWriting = writing.slice(0, 3);
+  const recentNotes = notes.slice(0, 3);
 
   const experience = [
-    { company: "scotiabank", role: "engineering" },
-    { company: "tangerine", role: "devops" },
+    {
+      company: "scotiabank (sep. - dec. 2025)",
+      role: "engineering",
+      icon: "/icons/scotiabank.svg",
+    },
+    {
+      company: "tangerine  (jan. - apr. 2025)",
+      role: "devops",
+      icon: "/icons/tangerine.svg",
+    },
   ];
 
   const links = [
@@ -48,11 +58,7 @@ export default function DhruvSystemsPortfolio() {
 
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-[#0b0d10] text-zinc-200 selection:bg-zinc-700 selection:text-white">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <div className="ambient-glow ambient-glow-slate left-[-16rem] top-[-10rem] h-[34rem] w-[34rem] sm:h-[42rem] sm:w-[42rem]" />
-        <div className="ambient-glow ambient-glow-amber bottom-[-16rem] right-[-12rem] h-[32rem] w-[32rem] sm:h-[40rem] sm:w-[40rem]" />
-        <div className="ambient-noise absolute inset-0" />
-      </div>
+      <AmbientBackground />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-10 sm:px-10 sm:py-14 lg:px-16 lg:py-20">
 
@@ -71,8 +77,13 @@ export default function DhruvSystemsPortfolio() {
 
               <p className="mt-6 max-w-xl text-[15px] leading-7 text-zinc-400">
                 building software focused on clarity, fast iteration, and tools that
-                make engineering work sharper. <em><b>i'm always open to new opportunities
-                to meet cool people and build awesome stuff.</b></em>
+                make engineering work sharper.{" "}
+                <em>
+                  <b>
+                    I&apos;m always open to new opportunities to meet cool people and
+                    build awesome stuff.
+                  </b>
+                </em>
               </p>
             </div>
 
@@ -103,7 +114,17 @@ export default function DhruvSystemsPortfolio() {
               <ul className="space-y-3 text-zinc-300">
                 {experience.map((exp) => (
                   <li key={exp.company} className="flex justify-between text-[15px]">
-                    <span>{exp.company}</span>
+                    <span className="flex items-center gap-2.5">
+                      <Image
+                        src={exp.icon}
+                        alt=""
+                        width={14}
+                        height={14}
+                        aria-hidden="true"
+                        className="h-[14px] w-[14px] shrink-0 opacity-55"
+                      />
+                      <span>{exp.company}</span>
+                    </span>
                     <span className="text-zinc-500">{exp.role}</span>
                   </li>
                 ))}
@@ -131,19 +152,19 @@ export default function DhruvSystemsPortfolio() {
           {/* RIGHT CONTENT */}
           <section className="space-y-14 lg:space-y-8">
 
-            <Panel title="latest notes / writing">
+            <Panel title="latest notes">
 
               <div className="divide-y divide-zinc-800 border-y border-zinc-800">
 
-                {recentWriting.map((note) => (
+                {recentNotes.map((note) => (
 
                   <Link
                     key={note.slug}
-                    href={`/writing#${note.slug}`}
+                    href={`/notes/${note.slug}`}
                     className="group grid gap-2 py-4 transition sm:grid-cols-[88px_1fr]"
                   >
                     <span className="text-[11px] uppercase tracking-[0.2em] text-zinc-600 transition group-hover:text-zinc-500">
-                      {note.type}
+                      {formatNoteDate(note.date)}
                     </span>
                     <span className="text-[15px] leading-6 text-zinc-300 transition group-hover:text-white">
                       {note.title}
@@ -153,7 +174,7 @@ export default function DhruvSystemsPortfolio() {
                 ))}
 
                 <Link
-                  href="/writing"
+                  href="/notes"
                   className="group grid gap-2 py-4 transition sm:grid-cols-[88px_1fr]"
                 >
                   <span className="text-[11px] uppercase tracking-[0.2em] text-zinc-600 transition group-hover:text-zinc-500">
