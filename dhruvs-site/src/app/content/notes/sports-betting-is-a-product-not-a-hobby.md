@@ -11,3 +11,7 @@ I've tried my hand at sports betting before, and I immediately realized why the 
 Sports betting preys on the same need for community and stimulation that makes sports meaningful in the first place. It nudges people toward confusing risk with skill, and it wraps that confusion in polished interfaces, boosts, odds changes, and endless prompts to do one more thing. In trading, you would call that being exit liquidity. In sports, it gets framed as participation.
 
 The longer I sit with it, the more it feels like a product problem rather than just a personal discipline problem. If the surrounding system is optimized to trigger impulse, then the outcomes should not surprise us. We should be much more skeptical of how casually gambling is being normalized inside everyday sports culture.
+
+thanks to airagan for inspiring me to write this btw
+
+edit: the night I wrote this bam adebayo score 83 pts lol, someones under just got destroyed
