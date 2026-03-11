@@ -14,4 +14,4 @@ The longer I sit with it, the more it feels like a product problem rather than j
 
 thanks to airagan for inspiring me to write this btw
 
-edit: the night I wrote this bam adebayo score 83 pts lol, someones under just got destroyed
+edit: the night I wrote this bam adebayo scored 83 pts lol, someones under just got destroyed
