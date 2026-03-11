@@ -13,13 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dhruv Venkat",
+  title: "dhruv venkat",
   description: "hi im dhruv",
   openGraph: {
-    title: "Dhruv Venkat",
+    title: "dhruv venkat",
     description: "hi im dhruv",
     url: "https://dhruvvenkat.com",
-    siteName: "Dhruv Venkat",
+    siteName: "dhruv venkat",
     images: [
       {
         url: "/dvlogo.png",
