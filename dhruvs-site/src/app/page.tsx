@@ -236,6 +236,10 @@ export default function DhruvSystemsPortfolio() {
 
         </div>
 
+        <footer className="mt-16 border-t border-zinc-800 pt-6 text-[12px] uppercase tracking-[0.18em] text-zinc-600">
+          &copy; 2026 Dhruv Venkat. All Rights Reserved
+        </footer>
+
       </div>
     </main>
   );
