@@ -82,10 +82,10 @@ export default function DhruvSystemsPortfolio() {
     <main className="relative isolate min-h-screen overflow-hidden bg-[#0b0d10] text-zinc-200 selection:bg-zinc-700 selection:text-white">
       <AmbientBackground />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 py-10 sm:px-10 sm:py-14 lg:px-16 lg:py-20">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-5 pb-3 sm:px-10 sm:pt-9 sm:pb-4 lg:px-16 lg:pt-[3.25rem] lg:pb-5">
 
         {/* HEADER */}
-        <header className="mb-14 border-b border-zinc-800 pb-10">
+        <header className="mb-7 border-b border-zinc-800 pb-10">
           <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
 
             <div>
@@ -262,7 +262,7 @@ export default function DhruvSystemsPortfolio() {
 
         </div>
 
-        <footer className="mt-16 border-t border-zinc-800 pt-6 text-[12px] uppercase tracking-[0.18em] text-zinc-600">
+        <footer className="mt-7 border-t border-zinc-800 pt-5 text-[12px] uppercase tracking-[0.18em] text-zinc-600">
           &copy; 2026 Dhruv Venkat. All Rights Reserved
         </footer>
 
