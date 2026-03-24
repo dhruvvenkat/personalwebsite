@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+#gstack
+/dhruvs-site/src/.gstack
+
+#notes in prog
+src/app/content/notes/how-torrenting-works

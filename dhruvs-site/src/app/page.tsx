@@ -25,7 +25,7 @@ export default function DhruvSystemsPortfolio() {
   const current = [
     "computer engineering @ uwaterloo",
     "building new stuff every week",
-    "exploring AI-native engineering workflows and developer tooling",
+    "exploring ML compilers, computer architecture, and performance engineering",
     "hmu if we can cook!",
   ];
 
@@ -90,7 +90,7 @@ export default function DhruvSystemsPortfolio() {
 
             <div>
               <p className="mb-3 text-[11px] uppercase tracking-[0.25em] text-zinc-500">
-                systems · software · ai tooling
+                ml compilers · systems · architecture
               </p>
 
               <h1 className="text-4xl font-light tracking-tight text-white sm:text-6xl">
@@ -110,7 +110,7 @@ export default function DhruvSystemsPortfolio() {
             </div>
 
             <div className="grid content-start gap-4 self-end text-sm">
-              <InfoRow label="focus" value="AI devtools · systems · product engineering" />
+              <InfoRow label="focus" value="ml compilers · systems · architecture" />
               <InfoRow label="location" value="Waterloo / Toronto / Calgary" />
               <InfoRow label="status" value="building, experimenting, shipping" />
             </div>
