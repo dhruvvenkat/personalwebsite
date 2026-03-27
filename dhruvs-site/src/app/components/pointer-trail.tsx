@@ -1,7 +1,7 @@
 "use client";
 
 import type { CSSProperties, MutableRefObject } from "react";
-import { useEffect, useEffectEvent, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type Point = {
   x: number;
@@ -123,11 +123,12 @@ function usePointerTrailMotion(pattern: PointerTrailPattern) {
   const displayedVelocityRef = useRef(0);
 
   const patternConfig = POINTER_TRAIL_PATTERNS[pattern];
+  const { layers, maxVelocity, velocityDamping, settleDistancePx } = patternConfig;
 
-  const applyLayerStyles = useEffectEvent(() => {
+  const applyLayerStyles = useCallback(() => {
     const hasActiveTarget = isActiveRef.current && targetPointRef.current !== null;
 
-    patternConfig.layers.forEach((layer, index) => {
+    layers.forEach((layer, index) => {
       const element = layerRefs.current[index];
 
       if (!element) {
@@ -149,18 +150,18 @@ function usePointerTrailMotion(pattern: PointerTrailPattern) {
         `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%) scale(${scale})`;
       element.style.opacity = opacity.toFixed(3);
     });
-  });
+  }, [layers]);
 
-  const stopAnimation = useEffectEvent(() => {
+  const stopAnimation = useCallback(() => {
     if (animationFrameRef.current !== null) {
       window.cancelAnimationFrame(animationFrameRef.current);
       animationFrameRef.current = null;
     }
 
     isAnimatingRef.current = false;
-  });
+  }, []);
 
-  const resetTrail = useEffectEvent(() => {
+  const resetTrail = useCallback(() => {
     stopAnimation();
     isActiveRef.current = false;
     targetPointRef.current = null;
@@ -169,63 +170,7 @@ function usePointerTrailMotion(pattern: PointerTrailPattern) {
     velocityTargetRef.current = 0;
     displayedVelocityRef.current = 0;
     applyLayerStyles();
-  });
-
-  const animateTrail = useEffectEvent(() => {
-    if (!enabled) {
-      stopAnimation();
-      return;
-    }
-
-    const targetPoint = targetPointRef.current;
-
-    if (!isActiveRef.current || !targetPoint) {
-      stopAnimation();
-      applyLayerStyles();
-      return;
-    }
-
-    displayedVelocityRef.current +=
-      (velocityTargetRef.current - displayedVelocityRef.current) * 0.18;
-    velocityTargetRef.current *= patternConfig.velocityDamping;
-
-    let furthestDistance = 0;
-
-    patternConfig.layers.forEach((layer, index) => {
-      const currentPoint = renderedPointsRef.current[index] ?? targetPoint;
-      const nextPoint = {
-        x: currentPoint.x + (targetPoint.x - currentPoint.x) * layer.easing,
-        y: currentPoint.y + (targetPoint.y - currentPoint.y) * layer.easing,
-      };
-
-      renderedPointsRef.current[index] = nextPoint;
-      furthestDistance = Math.max(
-        furthestDistance,
-        Math.hypot(targetPoint.x - nextPoint.x, targetPoint.y - nextPoint.y),
-      );
-    });
-
-    applyLayerStyles();
-
-    if (
-      furthestDistance > patternConfig.settleDistancePx ||
-      displayedVelocityRef.current > 0.02
-    ) {
-      animationFrameRef.current = window.requestAnimationFrame(animateTrail);
-      return;
-    }
-
-    stopAnimation();
-  });
-
-  const ensureAnimation = useEffectEvent(() => {
-    if (isAnimatingRef.current || !enabled) {
-      return;
-    }
-
-    isAnimatingRef.current = true;
-    animationFrameRef.current = window.requestAnimationFrame(animateTrail);
-  });
+  }, [applyLayerStyles, stopAnimation]);
 
   useEffect(() => {
     const reducedMotionQuery = window.matchMedia(
@@ -254,13 +199,64 @@ function usePointerTrailMotion(pattern: PointerTrailPattern) {
       finePointerQuery.removeEventListener("change", syncEnabledState);
       resetTrail();
     };
-  }, []);
+  }, [resetTrail]);
 
   useEffect(() => {
     if (!enabled) {
       resetTrail();
       return;
     }
+
+    const animateTrail = () => {
+      const targetPoint = targetPointRef.current;
+
+      if (!isActiveRef.current || !targetPoint) {
+        stopAnimation();
+        applyLayerStyles();
+        return;
+      }
+
+      displayedVelocityRef.current +=
+        (velocityTargetRef.current - displayedVelocityRef.current) * 0.18;
+      velocityTargetRef.current *= velocityDamping;
+
+      let furthestDistance = 0;
+
+      layers.forEach((layer, index) => {
+        const currentPoint = renderedPointsRef.current[index] ?? targetPoint;
+        const nextPoint = {
+          x: currentPoint.x + (targetPoint.x - currentPoint.x) * layer.easing,
+          y: currentPoint.y + (targetPoint.y - currentPoint.y) * layer.easing,
+        };
+
+        renderedPointsRef.current[index] = nextPoint;
+        furthestDistance = Math.max(
+          furthestDistance,
+          Math.hypot(targetPoint.x - nextPoint.x, targetPoint.y - nextPoint.y),
+        );
+      });
+
+      applyLayerStyles();
+
+      if (
+        furthestDistance > settleDistancePx ||
+        displayedVelocityRef.current > 0.02
+      ) {
+        animationFrameRef.current = window.requestAnimationFrame(animateTrail);
+        return;
+      }
+
+      stopAnimation();
+    };
+
+    const ensureAnimation = () => {
+      if (isAnimatingRef.current) {
+        return;
+      }
+
+      isAnimatingRef.current = true;
+      animationFrameRef.current = window.requestAnimationFrame(animateTrail);
+    };
 
     const handlePointerMove = (event: PointerEvent) => {
       const nextPoint = {
@@ -278,7 +274,7 @@ function usePointerTrailMotion(pattern: PointerTrailPattern) {
         );
 
         velocityTargetRef.current = Math.min(
-          distance / elapsedMs / patternConfig.maxVelocity,
+          distance / elapsedMs / maxVelocity,
           1,
         );
       }
@@ -291,7 +287,7 @@ function usePointerTrailMotion(pattern: PointerTrailPattern) {
 
       if (!isActiveRef.current) {
         isActiveRef.current = true;
-        renderedPointsRef.current = patternConfig.layers.map(() => nextPoint);
+        renderedPointsRef.current = layers.map(() => nextPoint);
         applyLayerStyles();
       }
 
@@ -322,7 +318,16 @@ function usePointerTrailMotion(pattern: PointerTrailPattern) {
       document.removeEventListener("mouseout", handleWindowExit);
       resetTrail();
     };
-  }, [enabled]);
+  }, [
+    applyLayerStyles,
+    enabled,
+    layers,
+    maxVelocity,
+    resetTrail,
+    settleDistancePx,
+    stopAnimation,
+    velocityDamping,
+  ]);
 
   return {
     enabled,
