@@ -26,6 +26,52 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.pointer-trail-layer {
+  --pointer-orb-core-color: rgba(255, 255, 255, 0.72);
+  --pointer-orb-amber-color: rgba(237, 203, 164, 0.34);
+  --pointer-orb-slate-color: rgba(126, 140, 182, 0.2);
+  --pointer-orb-shadow-color: rgba(237, 203, 164, 0.12);
+  --pointer-orb-shadow-size: 28px;
+  --pointer-orb-blur: 0px;
+  --pointer-orb-size: 24px;
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  overflow: hidden;
+}
+
+.pointer-trail-orb {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: var(--pointer-orb-size);
+  height: var(--pointer-orb-size);
+  border-radius: 9999px;
+  background:
+    radial-gradient(circle at 30% 30%, var(--pointer-orb-core-color) 0%, var(--pointer-orb-amber-color) 34%, var(--pointer-orb-slate-color) 66%, rgba(126, 140, 182, 0) 100%);
+  box-shadow: 0 0 var(--pointer-orb-shadow-size) var(--pointer-orb-shadow-color);
+  filter: blur(var(--pointer-orb-blur));
+  transform: translate3d(-9999px, -9999px, 0) translate(-50%, -50%) scale(0.82);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.pointer-trail-orb-main {
+  --pointer-orb-shadow-size: 32px;
+  --pointer-orb-blur: 0px;
+}
+
+.pointer-trail-orb-echo-one {
+  --pointer-orb-shadow-size: 44px;
+  --pointer-orb-blur: 10px;
+}
+
+.pointer-trail-orb-echo-two {
+  --pointer-orb-shadow-size: 54px;
+  --pointer-orb-blur: 18px;
+}
+
 @keyframes ambient-drift-slate {
   0% {
     transform: translate3d(0, 0, 0) scale(1);
@@ -83,6 +129,10 @@ body {
   .ambient-glow-slate,
   .ambient-glow-amber {
     animation: none;
+  }
+
+  .pointer-trail-layer {
+    display: none;
   }
 }
 
