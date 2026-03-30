@@ -24,7 +24,7 @@ function InfoRow({ label, value }: InfoRowProps) {
 export default function DhruvSystemsPortfolio() {
   const current = [
     "computer engineering @ uwaterloo",
-    "building new stuff every week",
+    "aspiring polymath",
     "exploring ML compilers, computer architecture, and performance engineering",
     "hmu if we can cook!",
   ];
