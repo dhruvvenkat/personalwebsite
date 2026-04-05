@@ -16,12 +16,15 @@ export async function GET() {
   }
 
   try {
-    const response = await fetch("https://api.api-ninjas.com/v1/quotes", {
-      cache: "no-store",
-      headers: {
-        "X-Api-Key": apiKey,
+    const response = await fetch(
+      "https://api.api-ninjas.com/v2/randomquotes?categories=success,wisdom,inspirational,leadership",
+      {
+        cache: "no-store",
+        headers: {
+          "X-Api-Key": apiKey,
+        },
       },
-    });
+    );
 
     if (!response.ok) {
       const errorText = await response.text();
