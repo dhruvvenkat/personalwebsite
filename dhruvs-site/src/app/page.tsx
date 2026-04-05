@@ -4,6 +4,7 @@ import type { IconType } from "react-icons";
 import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 
 import { AmbientBackground } from "./components/ambient-background";
+import { HomeMascot } from "./components/home-mascot";
 import { Panel } from "./components/panel";
 import { formatNoteDate, getAllNoteSummaries } from "./lib/notes";
 
@@ -81,6 +82,7 @@ export default function DhruvSystemsPortfolio() {
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-[#0b0d10] text-zinc-200 selection:bg-zinc-700 selection:text-white">
       <AmbientBackground />
+      <HomeMascot />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-5 pb-3 sm:px-10 sm:pt-9 sm:pb-4 lg:px-16 lg:pt-[3.25rem] lg:pb-5">
 
