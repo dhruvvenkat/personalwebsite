@@ -8,6 +8,10 @@ type Quote = {
   author: string;
 };
 
+type QuoteErrorResponse = {
+  error?: string;
+};
+
 export function HomeMascot() {
   const [isBubbleOpen, setIsBubbleOpen] = useState(false);
   const [quote, setQuote] = useState<Quote | null>(null);
@@ -42,14 +46,19 @@ export function HomeMascot() {
       const response = await fetch("/api/quote", {
         cache: "no-store",
       });
-      const data = (await response.json()) as
-        | Quote
-        | {
-            error?: string;
-          };
+      const data = (await response.json()) as Quote | QuoteErrorResponse;
 
-      if (!response.ok || !("content" in data) || !("author" in data)) {
-        throw new Error(data.error ?? "Unable to fetch quote right now.");
+      if (
+        !response.ok ||
+        !("content" in data) ||
+        !("author" in data)
+      ) {
+        const errorMessage =
+          "error" in data && typeof data.error === "string"
+            ? data.error
+            : "Unable to fetch quote right now.";
+
+        throw new Error(errorMessage);
       }
 
       setQuote({
