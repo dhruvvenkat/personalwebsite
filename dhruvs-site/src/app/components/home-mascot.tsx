@@ -84,7 +84,7 @@ export function HomeMascot() {
         className="pointer-events-auto flex flex-col items-end"
       >
         {isBubbleOpen && (
-          <div className="relative mb-4 w-[18rem] rounded-[1.75rem] bg-white px-5 py-4 text-left text-zinc-900 shadow-[0_18px_60px_rgba(255,255,255,0.18)] sm:w-[22rem]">
+          <div className="relative mb-4 w-[15rem] rounded-[1.75rem] bg-white px-5 py-4 text-left text-zinc-900 shadow-[0_18px_60px_rgba(255,255,255,0.18)] sm:w-[18rem]">
             {isLoading ? (
               <p className="min-h-[5.5rem] text-[15px] leading-6 text-zinc-500">
                 Loading...
