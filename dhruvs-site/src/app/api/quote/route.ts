@@ -5,6 +5,19 @@ type ApiNinjasQuote = {
   author: string;
 };
 
+function normalizeQuoteText(value: string) {
+  return value
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/\s+([,.;:!?])/g, "$1")
+    .replace(/([,;:])(?=[A-Za-z"'“‘])/g, "$1 ")
+    .replace(/([a-z0-9][.!?])(?=[A-Za-z"'“‘])/g, "$1 ")
+    .replace(/(^|[.!?]\s+)(["'“‘([{]*)([a-z])/g, (_, prefix, opener, letter) => {
+      return `${prefix}${opener}${letter.toUpperCase()}`;
+    })
+    .replace(/\bi\b/g, "I");
+}
+
 export async function GET() {
   const apiKey = process.env.API_NINJAS_API_KEY;
 
@@ -49,7 +62,7 @@ export async function GET() {
     }
 
     return NextResponse.json({
-      content: quote.quote,
+      content: normalizeQuoteText(quote.quote),
       author: quote.author,
     });
   } catch {
