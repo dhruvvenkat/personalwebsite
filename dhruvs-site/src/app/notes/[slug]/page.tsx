@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 
 import { AmbientBackground } from "../../components/ambient-background";
+import { ReadingProgress } from "../../components/reading-progress";
 import {
   formatNoteDate,
   getAllNoteSummaries,
@@ -50,6 +51,7 @@ export default async function NotePage({ params }: NotePageProps) {
 
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-[#0b0d10] text-zinc-200 selection:bg-zinc-700 selection:text-white">
+      <ReadingProgress />
       <AmbientBackground />
 
       <div className="relative z-10 mx-auto max-w-5xl px-6 py-10 sm:px-10 sm:py-14 lg:px-16 lg:py-20">
