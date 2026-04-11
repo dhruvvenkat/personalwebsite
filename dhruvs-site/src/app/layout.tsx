@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "dhruv venkat",
     images: [
       {
-        url: "/dvlogo.png",
+        url: "dhruvs-site/public/icons/SP-Studio (1).png",
         width: 1200,
         height: 630,
       },
