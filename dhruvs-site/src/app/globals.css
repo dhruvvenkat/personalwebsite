@@ -26,6 +26,24 @@ body {
   font-family: var(--font-geist-sans), sans-serif;
 }
 
+.animated-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  text-decoration: none;
+  transition:
+    background-size 220ms ease,
+    color 160ms ease;
+}
+
+.animated-underline:hover,
+.animated-underline:focus-visible,
+.group:hover .animated-underline,
+.group:focus-visible .animated-underline {
+  background-size: 100% 1px;
+}
+
 code,
 pre,
 kbd,
@@ -141,6 +159,11 @@ samp {
   .pointer-trail-layer {
     display: none;
   }
+
+  .animated-underline,
+  .note-prose a {
+    transition: none;
+  }
 }
 
 .note-prose > * + * {
@@ -172,9 +195,20 @@ samp {
 }
 
 .note-prose a {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
   color: rgb(228 228 231);
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+  text-decoration: none;
+  transition:
+    background-size 220ms ease,
+    color 160ms ease;
+}
+
+.note-prose a:hover,
+.note-prose a:focus-visible {
+  background-size: 100% 1px;
 }
 
 .note-prose strong {

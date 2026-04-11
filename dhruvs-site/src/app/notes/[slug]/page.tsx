@@ -56,7 +56,7 @@ export default async function NotePage({ params }: NotePageProps) {
         <header className="mb-12 border-b border-zinc-800 pb-10">
           <Link
             href="/notes"
-            className="mb-8 inline-flex text-[11px] uppercase tracking-[0.25em] text-zinc-500 transition hover:text-white"
+            className="animated-underline mb-8 inline-flex text-[11px] uppercase tracking-[0.25em] text-zinc-500 transition hover:text-white"
           >
             notes
           </Link>

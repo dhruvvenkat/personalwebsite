@@ -17,7 +17,7 @@ export default function NotesIndexPage() {
         <header className="mb-14 border-b border-zinc-800 pb-10">
           <Link
             href="/"
-            className="mb-8 inline-flex text-[11px] uppercase tracking-[0.25em] text-zinc-500 transition hover:text-white"
+            className="animated-underline mb-8 inline-flex text-[11px] uppercase tracking-[0.25em] text-zinc-500 transition hover:text-white"
           >
             dhruv venkat
           </Link>
@@ -59,7 +59,7 @@ export default function NotesIndexPage() {
                       </span>
                     </div>
 
-                    <h2 className="text-xl font-light tracking-tight text-zinc-100 transition group-hover:text-white">
+                    <h2 className="animated-underline inline text-xl font-light tracking-tight text-zinc-100 transition group-hover:text-white">
                       {note.title}
                     </h2>
 
@@ -85,7 +85,7 @@ export default function NotesIndexPage() {
                   <span className="pt-1 text-[11px] uppercase tracking-[0.2em] text-zinc-600 transition group-hover:text-zinc-500">
                     {formatNoteDate(note.date)}
                   </span>
-                  <span className="text-lg font-light text-zinc-200 transition group-hover:text-white">
+                  <span className="animated-underline w-fit text-lg font-light text-zinc-200 transition group-hover:text-white">
                     {note.title}
                   </span>
                 </Link>
