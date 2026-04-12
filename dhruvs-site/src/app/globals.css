@@ -5,6 +5,18 @@
   --foreground: #171717;
 }
 
+html[data-theme="dark"] {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  --background: #ffffff;
+  --foreground: #27272a;
+  color-scheme: light;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -24,6 +36,67 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), sans-serif;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 80;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  appearance: none;
+  background: transparent;
+  color: rgb(244 244 245);
+  outline: none;
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.theme-toggle:hover {
+  color: rgb(255 255 255);
+}
+
+.theme-toggle:active {
+  transform: translateY(1px);
+}
+
+.theme-toggle-moon {
+  display: none;
+}
+
+html[data-theme="light"] .theme-toggle-sun {
+  display: none;
+}
+
+html[data-theme="light"] .theme-toggle-moon {
+  display: block;
+}
+
+html[data-theme="light"] .theme-toggle {
+  color: rgb(39 39 42);
+}
+
+html[data-theme="light"] .theme-toggle:hover {
+  color: rgb(24 24 27);
+}
+
+@media (max-width: 1023px) {
+  .theme-toggle {
+    top: 0.75rem;
+    left: 0.75rem;
+  }
+
+  main > .relative.z-10 {
+    padding-top: 4.5rem;
+  }
 }
 
 .animated-underline {
@@ -64,6 +137,13 @@ samp {
   inset: 0;
   z-index: 60;
   overflow: hidden;
+}
+
+html[data-theme="light"] .pointer-trail-layer {
+  --pointer-orb-core-color: rgba(9, 9, 11, 0.82);
+  --pointer-orb-amber-color: rgba(24, 24, 27, 0.52);
+  --pointer-orb-slate-color: rgba(63, 63, 70, 0.34);
+  --pointer-orb-shadow-color: rgba(9, 9, 11, 0.22);
 }
 
 .pointer-trail-orb {
@@ -252,4 +332,102 @@ samp {
   border-left: 1px solid rgb(63 63 70);
   padding-left: 1rem;
   color: rgb(161 161 170);
+}
+
+html[data-theme="light"] [class~="bg-[#0b0d10]"] {
+  background-color: rgb(255 255 255);
+}
+
+html[data-theme="light"] [class~="bg-zinc-950/30"],
+html[data-theme="light"] [class~="bg-zinc-950/35"],
+html[data-theme="light"] [class~="bg-zinc-950/50"],
+html[data-theme="light"] [class~="bg-zinc-950/55"] {
+  background-color: rgba(244, 244, 245, 0.72);
+}
+
+html[data-theme="light"] [class~="hover:bg-zinc-950/50"]:hover,
+html[data-theme="light"] [class~="hover:bg-zinc-950/55"]:hover,
+html[data-theme="light"] .group:hover [class~="group-hover:bg-zinc-950/50"],
+html[data-theme="light"] .group:hover [class~="group-hover:bg-zinc-950/55"] {
+  background-color: rgba(228, 228, 231, 0.78);
+}
+
+html[data-theme="light"] [class~="text-white"],
+html[data-theme="light"] [class~="text-zinc-100"],
+html[data-theme="light"] [class~="text-zinc-200"],
+html[data-theme="light"] [class~="hover:text-white"]:hover,
+html[data-theme="light"] .group:hover [class~="group-hover:text-white"] {
+  color: rgb(39 39 42);
+}
+
+html[data-theme="light"] [class~="text-zinc-300"],
+html[data-theme="light"] [class~="hover:text-zinc-300"]:hover,
+html[data-theme="light"] .group:hover [class~="group-hover:text-zinc-300"] {
+  color: rgb(63 63 70);
+}
+
+html[data-theme="light"] [class~="text-zinc-400"],
+html[data-theme="light"] [class~="hover:text-zinc-400"]:hover,
+html[data-theme="light"] .group:hover [class~="group-hover:text-zinc-400"] {
+  color: rgb(82 82 91);
+}
+
+html[data-theme="light"] [class~="text-zinc-500"],
+html[data-theme="light"] [class~="text-zinc-600"],
+html[data-theme="light"] [class~="hover:text-zinc-500"]:hover,
+html[data-theme="light"] .group:hover [class~="group-hover:text-zinc-500"] {
+  color: rgb(113 113 122);
+}
+
+html[data-theme="light"] [class~="border-zinc-800"],
+html[data-theme="light"] [class~="border-zinc-700"],
+html[data-theme="light"] [class~="hover:border-zinc-700"]:hover,
+html[data-theme="light"] .group:hover [class~="group-hover:border-zinc-700"] {
+  border-color: rgb(212 212 216);
+}
+
+html[data-theme="light"] [class~="bg-zinc-800"] {
+  background-color: rgb(212 212 216);
+}
+
+html[data-theme="light"] [class~="divide-zinc-800"] > :not(:last-child) {
+  border-color: rgb(212 212 216);
+}
+
+html[data-theme="light"] .note-prose p {
+  color: rgb(63 63 70);
+}
+
+html[data-theme="light"] .note-prose h2,
+html[data-theme="light"] .note-prose h3,
+html[data-theme="light"] .note-prose h4,
+html[data-theme="light"] .note-prose strong,
+html[data-theme="light"] .note-prose a {
+  color: rgb(39 39 42);
+}
+
+html[data-theme="light"] .note-prose code {
+  border-color: rgb(212 212 216);
+  background: rgba(244, 244, 245, 0.86);
+  color: rgb(39 39 42);
+}
+
+html[data-theme="light"] .note-prose pre {
+  border-color: rgb(212 212 216);
+  background: rgba(244, 244, 245, 0.88);
+}
+
+html[data-theme="light"] .note-prose blockquote {
+  border-left-color: rgb(212 212 216);
+  color: rgb(82 82 91);
+}
+
+html[data-theme="light"] [class~="bg-zinc-950/30"] [class~="text-zinc-200"],
+html[data-theme="light"] [class~="bg-zinc-950/35"] [class~="text-zinc-100"],
+html[data-theme="light"] [class~="bg-zinc-950/35"] [class~="text-zinc-200"] {
+  color: rgb(39 39 42);
+}
+
+html[data-theme="light"] [class~="bg-zinc-100"] {
+  background-color: rgb(39 39 42);
 }
