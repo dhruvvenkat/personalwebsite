@@ -264,7 +264,7 @@ export default function DhruvSystemsPortfolio() {
               </div>
             </Panel>
 
-            <Panel title="projects">
+            <Panel title="selected projects">
               <ul className="space-y-3">
                 {projects.map((project) => (
                   <ProjectRow

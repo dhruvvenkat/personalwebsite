@@ -39,7 +39,7 @@ body {
 }
 
 .theme-toggle {
-  position: fixed;
+  position: absolute;
   top: 1rem;
   left: 1rem;
   z-index: 80;
@@ -54,6 +54,7 @@ body {
   appearance: none;
   background: transparent;
   color: rgb(244 244 245);
+  cursor: pointer;
   outline: none;
   transition:
     color 160ms ease,
@@ -93,9 +94,12 @@ html[data-theme="light"] .theme-toggle:hover {
     top: 0.75rem;
     left: 0.75rem;
   }
+}
 
-  main > .relative.z-10 {
-    padding-top: 4.5rem;
+@media (max-width: 640px) {
+  .theme-toggle {
+    right: 0.75rem;
+    left: auto;
   }
 }
 
@@ -119,8 +123,17 @@ html[data-theme="light"] .theme-toggle:hover {
 
 .project-row {
   --project-tag-reveal-width: 16rem;
+  --project-tag-reveal-duration: 360ms;
+  --project-tag-motion-duration: 280ms;
+  --project-tag-stagger: 40ms;
   --project-tag-ease: cubic-bezier(0.22, 1, 0.36, 1);
   position: relative;
+}
+
+.project-row .animated-underline {
+  transition:
+    background-size var(--project-tag-reveal-duration) var(--project-tag-ease),
+    color 160ms ease;
 }
 
 .project-tags-slot {
@@ -142,6 +155,7 @@ html[data-theme="light"] .theme-toggle:hover {
   min-height: 1.5rem;
   border: 1px solid rgb(39 39 42);
   border-radius: 6px;
+  background: rgb(11 13 16);
   padding: 0.05rem 0.45rem;
   color: rgb(161 161 170);
   font-size: 0.6875rem;
@@ -156,7 +170,7 @@ html[data-theme="light"] .theme-toggle:hover {
 
   .project-row:hover,
   .project-row:focus-visible {
-    /* Reserve the tag drawer space immediately, so text wraps once instead of reflowing during the reveal. */
+    /* Reserve the tag drawer space immediately, so long titles wrap in one step. */
     padding-right: var(--project-tag-reveal-width);
   }
 
@@ -173,10 +187,12 @@ html[data-theme="light"] .theme-toggle:hover {
 
   .project-tags-drawer {
     /* The absolute drawer is clipped to zero width, then peels out from the row edge. */
+    position: relative;
+    z-index: 1;
     max-width: 0;
     flex-wrap: nowrap;
     justify-content: flex-end;
-    transition: max-width 280ms var(--project-tag-ease);
+    transition: max-width var(--project-tag-reveal-duration) var(--project-tag-ease);
   }
 
   .project-row:hover .project-tags-drawer,
@@ -185,12 +201,14 @@ html[data-theme="light"] .theme-toggle:hover {
   }
 
   .project-tag {
+    position: relative;
+    z-index: 1;
     transform: translateX(0.45rem);
     transition:
-      transform 240ms var(--project-tag-ease),
+      transform var(--project-tag-motion-duration) var(--project-tag-ease),
       border-color 160ms ease,
       color 160ms ease;
-    transition-delay: calc(var(--project-tag-index) * 36ms);
+    transition-delay: calc(var(--project-tag-index) * var(--project-tag-stagger));
   }
 
   .project-row:hover .project-tag,
@@ -490,6 +508,7 @@ html[data-theme="light"] [class~="divide-zinc-800"] > :not(:last-child) {
 
 html[data-theme="light"] .project-tag {
   border-color: rgb(212 212 216);
+  background: rgb(255 255 255);
   color: rgb(113 113 122);
 }
 
