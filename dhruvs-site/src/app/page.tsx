@@ -6,6 +6,7 @@ import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import { AmbientBackground } from "./components/ambient-background";
 import { HomeMascot } from "./components/home-mascot";
 import { Panel } from "./components/panel";
+import { ProjectRow } from "./components/project-row";
 import { formatNoteDate, getAllNoteSummaries } from "./lib/notes";
 
 type InfoRowProps = {
@@ -34,14 +35,17 @@ export default function DhruvSystemsPortfolio() {
     {
       name: "BoilerBrain - automating boilerplate code generation with natural language",
       link: "https://github.com/dhruvvenkat/boilerbrain",
+      tags: ["ai", "codegen", "tools"],
     },
     {
       name: "AgentBench - agent evolution framework for the future",
       link: "https://github.com/dhruvvenkat/agentbench",
+      tags: ["agents", "evals", "research"],
     },
     {
       name: "LoadStar - deterministic API load simulator",
       link: "https://github.com/dhruvvenkat/loadstar",
+      tags: ["systems", "api", "testing"],
     },
   ];
 
@@ -261,16 +265,14 @@ export default function DhruvSystemsPortfolio() {
             </Panel>
 
             <Panel title="projects">
-              <ul className="space-y-3 text-[15px] leading-7 text-zinc-300">
+              <ul className="space-y-3">
                 {projects.map((project) => (
-                  <li key={project.name}>
-                    <a
-                      href={project.link}
-                      className="animated-underline transition hover:text-white"
-                    >
-                      {project.name}
-                    </a>
-                  </li>
+                  <ProjectRow
+                    key={project.name}
+                    name={project.name}
+                    href={project.link}
+                    tags={project.tags}
+                  />
                 ))}
               </ul>
             </Panel>
