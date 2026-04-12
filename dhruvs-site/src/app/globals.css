@@ -38,6 +38,48 @@ body {
   font-family: var(--font-geist-sans), sans-serif;
 }
 
+main {
+  --grain-opacity: 0.085;
+  --grain-size-a: 91px;
+  --grain-size-b: 137px;
+  --grain-size-c: 211px;
+}
+
+main::before {
+  /* CSS-only grain. It sits above the page background/glows and below z-10 content.
+     Tune down: lower --grain-opacity or increase --grain-size-*.
+     Tune up: raise --grain-opacity slightly or reduce --grain-size-*. */
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  opacity: var(--grain-opacity);
+  background-image:
+    radial-gradient(circle at 18% 28%, rgba(255, 255, 255, 0.48) 0 0.5px, transparent 0.85px),
+    radial-gradient(circle at 72% 64%, rgba(255, 255, 255, 0.34) 0 0.55px, transparent 0.9px),
+    radial-gradient(circle at 42% 82%, rgba(255, 255, 255, 0.22) 0 0.6px, transparent 0.95px);
+  background-position:
+    0 0,
+    37px 53px,
+    91px 29px;
+  background-size:
+    var(--grain-size-a) var(--grain-size-a),
+    var(--grain-size-b) var(--grain-size-b),
+    var(--grain-size-c) var(--grain-size-c);
+}
+
+html[data-theme="light"] main {
+  --grain-opacity: 0.05;
+}
+
+html[data-theme="light"] main::before {
+  background-image:
+    radial-gradient(circle at 18% 28%, rgba(24, 24, 27, 0.28) 0 0.5px, transparent 0.85px),
+    radial-gradient(circle at 72% 64%, rgba(24, 24, 27, 0.18) 0 0.55px, transparent 0.9px),
+    radial-gradient(circle at 42% 82%, rgba(24, 24, 27, 0.12) 0 0.6px, transparent 0.95px);
+}
+
 .theme-toggle {
   position: absolute;
   top: 1rem;
@@ -330,16 +372,6 @@ html[data-theme="light"] .pointer-trail-layer {
   background:
     radial-gradient(circle at 62% 40%, rgba(128, 98, 68, 0.21) 0%, rgba(88, 66, 46, 0.12) 36%, rgba(24, 20, 17, 0.025) 58%, rgba(24, 20, 17, 0) 76%);
   animation: ambient-drift-amber 44s ease-in-out infinite alternate;
-}
-
-.ambient-noise {
-  opacity: 0.03;
-  background-image:
-    radial-gradient(rgba(255, 255, 255, 0.09) 0.6px, transparent 0.8px),
-    radial-gradient(rgba(255, 255, 255, 0.05) 0.5px, transparent 0.7px);
-  background-position: 0 0, 4px 5px;
-  background-size: 8px 8px, 11px 11px;
-  mix-blend-mode: soft-light;
 }
 
 @media (prefers-reduced-motion: reduce) {
