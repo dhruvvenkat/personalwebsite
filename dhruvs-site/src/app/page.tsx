@@ -105,7 +105,7 @@ export default function DhruvSystemsPortfolio() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-5 pb-3 sm:px-10 sm:pt-9 sm:pb-4 lg:px-16 lg:pt-[3.25rem] lg:pb-5">
         {/* HEADER */}
-        <header className="mb-7 border-b border-zinc-800 pb-10">
+        <header className="mb-4 pb-5">
           <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
             <div>
               <p className="mb-3 text-[11px] uppercase tracking-[0.25em] text-zinc-500">
