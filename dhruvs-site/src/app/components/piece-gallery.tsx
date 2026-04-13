@@ -414,9 +414,9 @@ export function PieceGallery({ pieces }: { pieces: Piece[] }) {
                   </h2>
                 </div>
 
-                {focusedImage.piece.sourceUrl && (
+                {focusedImage.image.sourceUrl && (
                   <a
-                    href={focusedImage.piece.sourceUrl}
+                    href={focusedImage.image.sourceUrl}
                     target="_blank"
                     rel="noreferrer"
                     aria-label={`Open source for ${getImageLabel(

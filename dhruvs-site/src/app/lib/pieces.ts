@@ -15,6 +15,7 @@ export type PieceImage = {
   alt: string;
   src: string;
   title?: string;
+  sourceUrl?: string;
   width?: number;
   height?: number;
 };
@@ -23,7 +24,6 @@ export type PieceFrontmatter = {
   title: string;
   date: string;
   description?: string;
-  sourceUrl?: string;
 };
 
 export type Piece = PieceFrontmatter & {
@@ -32,7 +32,7 @@ export type Piece = PieceFrontmatter & {
 };
 
 const pieceImagePattern =
-  /!\[([^\]]*)\]\(\s*"?([^"\s)]+)"?(?:\s+"([^"]+)")?\s*\)/g;
+  /\[!\[([^\]]*)\]\(\s*"?([^"\s)]+)"?(?:\s+"([^"]+)")?\s*\)\]\(\s*([^)]+?)\s*\)|!\[([^\]]*)\]\(\s*"?([^"\s)]+)"?(?:\s+"([^"]+)")?\s*\)/g;
 
 function isJpegStartOfFrame(marker: number) {
   return (
@@ -139,13 +139,14 @@ function normalizeDate(rawDate: string | Date | undefined) {
 
 function parsePieceImages(content: string): PieceImage[] {
   return [...content.matchAll(pieceImagePattern)].map((match) => {
-    const src = match[2] ?? "";
+    const src = match[2] ?? match[6] ?? "";
     const dimensions = getPublicImageDimensions(src);
 
     return {
-      alt: match[1]?.trim() ?? "",
+      alt: (match[1] ?? match[5])?.trim() ?? "",
       src,
-      title: match[3],
+      title: match[3] ?? match[7],
+      sourceUrl: match[4]?.trim(),
       width: dimensions?.width,
       height: dimensions?.height,
     };
@@ -166,7 +167,6 @@ function parsePieceFile(fileContents: string, slug: string): Piece {
     title: frontmatter.title,
     date,
     description: frontmatter.description,
-    sourceUrl: frontmatter.sourceUrl,
     images: parsePieceImages(content),
   };
 }
