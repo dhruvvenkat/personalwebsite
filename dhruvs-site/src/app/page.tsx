@@ -92,6 +92,7 @@ export default function DhruvSystemsPortfolio() {
     },
     { label: "email", href: "mailto:dvenkat@uwaterloo.ca" },
     { label: "résumé", href: "/dhruv-venkat-resume.pdf" },
+    { label: "pieces", href: "/pieces" },
   ] satisfies Array<{
     label: string;
     href: string;
@@ -180,28 +181,33 @@ export default function DhruvSystemsPortfolio() {
 
             <Panel title="links">
               <div className="flex flex-wrap gap-x-5 gap-y-2 text-[15px] text-zinc-400">
-                {links.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={link.label}
-                    className={
-                      link.icon
-                        ? "transition hover:text-white"
-                        : "animated-underline transition hover:text-white"
-                    }
-                  >
-                    {link.icon ? (
-                      <span className="flex h-[18px] w-[18px] items-center justify-center text-[16px]">
-                        <link.icon aria-hidden="true" />
-                      </span>
-                    ) : (
-                      link.label
-                    )}
-                  </a>
-                ))}
+                {links.map((link) => {
+                  const opensInNewTab =
+                    link.href.startsWith("http") || link.href.endsWith(".pdf");
+
+                  return (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target={opensInNewTab ? "_blank" : undefined}
+                      rel={opensInNewTab ? "noreferrer" : undefined}
+                      aria-label={link.label}
+                      className={
+                        link.icon
+                          ? "transition hover:text-white"
+                          : "animated-underline transition hover:text-white"
+                      }
+                    >
+                      {link.icon ? (
+                        <span className="flex h-[18px] w-[18px] items-center justify-center text-[16px]">
+                          <link.icon aria-hidden="true" />
+                        </span>
+                      ) : (
+                        link.label
+                      )}
+                    </a>
+                  );
+                })}
               </div>
             </Panel>
           </aside>
