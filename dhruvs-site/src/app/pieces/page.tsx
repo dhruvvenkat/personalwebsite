@@ -32,7 +32,7 @@ export default function PiecesPage() {
               </p> */}
 
               <h1 className="text-4xl font-light tracking-tight text-white sm:text-6xl">
-                Pieces
+                pieces
               </h1>
             </div>
 

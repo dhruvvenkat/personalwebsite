@@ -14,7 +14,7 @@ export default function NotesIndexPage() {
       <AmbientBackground />
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 py-10 sm:px-10 sm:py-14 lg:px-16 lg:py-20">
-        <header className="mb-14 border-b border-zinc-800 pb-10">
+        <header className="pb-3">
           <Link
             href="/"
             className="animated-underline mb-8 inline-flex text-[11px] uppercase tracking-[0.25em] text-zinc-500 transition hover:text-white"
@@ -24,12 +24,12 @@ export default function NotesIndexPage() {
 
           <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
             <div>
-              <p className="mb-3 text-[11px] uppercase tracking-[0.25em] text-zinc-500">
+              {/* <p className="mb-3 text-[11px] uppercase tracking-[0.25em] text-zinc-500">
                 notes
-              </p>
+              </p> */}
 
               <h1 className="text-4xl font-light tracking-tight text-white sm:text-6xl">
-                Notes
+                notes
               </h1>
             </div>
 
@@ -40,7 +40,7 @@ export default function NotesIndexPage() {
           </div>
         </header>
 
-        <div className="space-y-14">
+        <div className="space-y-7">
           {pinnedNotes.length > 0 && (
             <Panel title="featured">
               <div className="space-y-4">
