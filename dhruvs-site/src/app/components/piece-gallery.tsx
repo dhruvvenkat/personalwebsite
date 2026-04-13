@@ -38,6 +38,16 @@ function getImageLabel(image: PieceImage, index: number) {
   return image.title || image.alt || `image ${index + 1}`;
 }
 
+function getCollectionName(piece: Piece) {
+  const title = piece.title.trim();
+
+  if (!title || title.toLowerCase() === "n/a") {
+    return "n/a";
+  }
+
+  return title;
+}
+
 function getAspectRatio(image: PieceImage) {
   if (image.width && image.height && image.height > 0) {
     return image.width / image.height;
@@ -71,13 +81,16 @@ function buildJustifiedRow(
   );
   const naturalHeight = availableWidth / aspectRatioTotal;
   const height = maxHeight ? Math.min(naturalHeight, maxHeight) : naturalHeight;
+  const shouldPreserveRowWhitespace = height < naturalHeight;
   let assignedWidth = 0;
 
   const items = rowImages.map((item, index) => {
     const isLastItem = index === rowImages.length - 1;
-    const width = isLastItem
-      ? availableWidth - assignedWidth
-      : availableWidth * (item.aspectRatio / aspectRatioTotal);
+    const width = shouldPreserveRowWhitespace
+      ? height * item.aspectRatio
+      : isLastItem
+        ? availableWidth - assignedWidth
+        : availableWidth * (item.aspectRatio / aspectRatioTotal);
 
     assignedWidth += width;
 
@@ -154,10 +167,33 @@ function MetadataRow({ label, value }: MetadataRowProps) {
 export function PieceGallery({ pieces }: { pieces: Piece[] }) {
   const galleryRef = useRef<HTMLDivElement | null>(null);
   const [focusedImage, setFocusedImage] = useState<FocusedImage | null>(null);
+  const [selectedCollection, setSelectedCollection] = useState<string | null>(
+    null,
+  );
   const [galleryWidth, setGalleryWidth] = useState(0);
+  const collections = useMemo(() => {
+    const collectionNames = Array.from(new Set(pieces.map(getCollectionName)));
+
+    return collectionNames
+      .filter((collection) => collection !== "n/a")
+      .concat(collectionNames.includes("n/a") ? ["n/a"] : []);
+  }, [pieces]);
+  const activeCollection =
+    selectedCollection && collections.includes(selectedCollection)
+      ? selectedCollection
+      : null;
+  const filteredPieces = useMemo(() => {
+    if (!activeCollection) {
+      return pieces;
+    }
+
+    return pieces.filter(
+      (piece) => getCollectionName(piece) === activeCollection,
+    );
+  }, [activeCollection, pieces]);
   const galleryImages = useMemo(
     () =>
-      pieces.flatMap((piece) =>
+      filteredPieces.flatMap((piece) =>
         piece.images.map((image, index) => ({
           piece,
           image,
@@ -166,7 +202,7 @@ export function PieceGallery({ pieces }: { pieces: Piece[] }) {
           key: `${piece.slug}-${image.src}-${index}`,
         })),
       ),
-    [pieces],
+    [filteredPieces],
   );
   const justifiedRows = useMemo(
     () => buildJustifiedRows(galleryImages, galleryWidth),
@@ -225,6 +261,46 @@ export function PieceGallery({ pieces }: { pieces: Piece[] }) {
 
   return (
     <>
+      <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-5">
+        <span className="pt-2 text-[11px] uppercase tracking-[0.22em] text-zinc-600">
+          collection
+        </span>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            aria-pressed={!activeCollection}
+            onClick={() => setSelectedCollection(null)}
+            className={`rounded-full border px-3.5 py-1.5 text-[12px] leading-none transition ${
+              activeCollection
+                ? "border-zinc-800 text-zinc-500 hover:border-zinc-700 hover:text-white"
+                : "border-zinc-500 bg-zinc-950/50 text-white"
+            }`}
+          >
+            all
+          </button>
+
+          {collections.map((collection) => {
+            const isSelected = activeCollection === collection;
+
+            return (
+              <button
+                key={collection}
+                type="button"
+                aria-pressed={isSelected}
+                onClick={() => setSelectedCollection(collection)}
+                className={`rounded-full border px-3.5 py-1.5 text-[12px] leading-none transition ${
+                  isSelected
+                    ? "border-zinc-500 bg-zinc-950/50 text-white"
+                    : "border-zinc-800 text-zinc-500 hover:border-zinc-700 hover:text-white"
+                }`}
+              >
+                {collection}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       <div ref={galleryRef}>
         {justifiedRows.length > 0 ? (
           <div className="space-y-4">
