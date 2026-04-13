@@ -1,5 +1,5 @@
 ---
-title: justin bieber @ coachella 2026
+title: n/a
 date: "2026-04-12"
 description: pretty cool performance concept
 sourceUrl: https://www.independent.co.uk/arts-entertainment/music/news/justin-bieber-coachella-reviews-laptop-b2956073.html
