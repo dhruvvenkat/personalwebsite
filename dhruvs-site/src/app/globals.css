@@ -163,6 +163,28 @@ html[data-theme="light"] .theme-toggle:hover {
   background-size: 100% 1px;
 }
 
+.piece-focus-backdrop {
+  animation: piece-focus-fade 140ms ease-out;
+}
+
+.piece-focus-card {
+  animation: piece-focus-in 180ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: center;
+}
+
+@keyframes piece-focus-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes piece-focus-in {
+  from {
+    opacity: 0;
+    transform: scale(0.985) translateY(0.25rem);
+  }
+}
+
 .project-row {
   --project-tag-reveal-width: 16rem;
   --project-tag-reveal-duration: 360ms;
@@ -260,9 +282,12 @@ html[data-theme="light"] .theme-toggle:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .piece-focus-backdrop,
+  .piece-focus-card,
   .project-row,
   .project-tags-drawer,
   .project-tag {
+    animation: none;
     transition: none;
   }
 

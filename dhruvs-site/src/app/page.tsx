@@ -109,9 +109,9 @@ export default function DhruvSystemsPortfolio() {
         <header className="mb-4 pb-5">
           <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
             <div>
-              <p className="mb-3 text-[11px] uppercase tracking-[0.25em] text-zinc-500">
+              {/* <p className="mb-3 text-[11px] uppercase tracking-[0.25em] text-zinc-500">
                 ml compilers · systems · architecture
-              </p>
+              </p> */}
 
               <h1 className="text-4xl font-light tracking-tight text-white sm:text-6xl">
                 dhruv venkat
