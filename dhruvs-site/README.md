@@ -16,6 +16,25 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Terminal Projects
+
+The `/terminal` page embeds the ttyd endpoint from `NEXT_PUBLIC_TTYD_URL`.
+If the environment variable is not set, it defaults to:
+
+```bash
+http://143.198.35.46:7681/
+```
+
+Run ttyd on the terminal server with the visitor SSH command:
+
+```bash
+ttyd -W -p 7681 -t rendererType=canvas ssh visitor@ssh.dhruvvenkat.com
+```
+
+For production, serve ttyd through HTTPS and set `NEXT_PUBLIC_TTYD_URL` to
+that HTTPS URL. Browsers block an `http://` iframe inside an HTTPS site as
+mixed content.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
