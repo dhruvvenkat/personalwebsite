@@ -93,6 +93,7 @@ export default function DhruvSystemsPortfolio() {
     { label: "email", href: "mailto:dvenkat@uwaterloo.ca" },
     { label: "résumé", href: "/dhruv-venkat-resume.pdf" },
     { label: "pieces", href: "/pieces" },
+    { label: "ssh.dhruvvenkat.com", href: "/terminal" },
   ] satisfies Array<{
     label: string;
     href: string;
