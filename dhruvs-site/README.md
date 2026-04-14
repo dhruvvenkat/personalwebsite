@@ -28,12 +28,30 @@ http://143.198.35.46:7681/
 Run ttyd on the terminal server with the visitor SSH command:
 
 ```bash
-ttyd -W -p 7681 -t rendererType=canvas ssh visitor@ssh.dhruvvenkat.com
+ttyd -W -p 7681 -t rendererType=dom ssh -tt visitor@ssh.dhruvvenkat.com
 ```
 
 For production, serve ttyd through HTTPS and set `NEXT_PUBLIC_TTYD_URL` to
 that HTTPS URL. Browsers block an `http://` iframe inside an HTTPS site as
 mixed content.
+
+For example, run ttyd on localhost and proxy it through Caddy:
+
+```bash
+ttyd -W -i 127.0.0.1 -p 7681 -t rendererType=dom ssh -tt visitor@ssh.dhruvvenkat.com
+```
+
+```caddy
+ssh.dhruvvenkat.com {
+  reverse_proxy 127.0.0.1:7681
+}
+```
+
+Then set this environment variable for the deployed site:
+
+```bash
+NEXT_PUBLIC_TTYD_URL=https://ssh.dhruvvenkat.com/
+```
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
