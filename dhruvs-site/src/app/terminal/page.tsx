@@ -3,7 +3,10 @@ import Link from "next/link";
 import { AmbientBackground } from "../components/ambient-background";
 
 const ttydUrl =
-  process.env.NEXT_PUBLIC_TTYD_URL ?? "http://143.198.35.46:7681/";
+  process.env.NEXT_PUBLIC_TTYD_URL ??
+  (process.env.NODE_ENV === "development"
+    ? "http://143.198.35.46:7681/"
+    : "https://ssh.dhruvvenkat.com/");
 const terminalCommand = "ssh visitor@ssh.dhruvvenkat.com";
 
 export const metadata = {
@@ -38,7 +41,7 @@ export default function TerminalPage() {
           </div>
         </header>
 
-        <section className="flex min-h-[65vh] flex-1 flex-col overflow-hidden rounded-lg border border-zinc-800 bg-black">
+        <section className="flex min-h-[65vh] flex-1 flex-col overflow-hidden border border-zinc-800 bg-black">
           <iframe
             title="terminal projects"
             src={ttydUrl}

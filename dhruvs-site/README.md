@@ -19,10 +19,16 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Terminal Projects
 
 The `/terminal` page embeds the ttyd endpoint from `NEXT_PUBLIC_TTYD_URL`.
-If the environment variable is not set, it defaults to:
+If the environment variable is not set, local development defaults to:
 
 ```bash
 http://143.198.35.46:7681/
+```
+
+Production defaults to:
+
+```bash
+https://ssh.dhruvvenkat.com/
 ```
 
 Run ttyd on the terminal server with the visitor SSH command:
