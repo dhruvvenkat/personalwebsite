@@ -28,16 +28,24 @@ export default function TerminalPage() {
             dhruv venkat
           </Link>
 
-          <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
             <div>
               <h1 className="text-4xl font-light tracking-tight text-white sm:text-6xl">
                 terminal
               </h1>
             </div>
 
-            <p className="max-w-md text-[15px] leading-7 text-zinc-400 lg:justify-self-end lg:pt-8 lg:text-right">
-              <code className="font-mono text-zinc-300">{terminalCommand}</code>
-            </p>
+            <div className="max-w-2xl text-[13px] leading-6 text-zinc-500 lg:justify-self-end lg:pt-8 lg:text-right">
+              <p className="text-[15px] leading-7">
+                <code className="font-mono text-zinc-300">
+                  {terminalCommand}
+                </code>
+              </p>
+              <p className="mt-2">
+                browser terminals can feel slow. for the fastest path, run this
+                in your terminal.
+              </p>
+            </div>
           </div>
         </header>
 
