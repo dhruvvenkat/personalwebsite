@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { AmbientBackground } from "../components/ambient-background";
+import { TerminalEmbed } from "./terminal-embed";
 
 const ttydUrl =
   process.env.NEXT_PUBLIC_TTYD_URL ??
@@ -49,24 +50,7 @@ export default function TerminalPage() {
           </div>
         </header>
 
-        <section className="flex min-h-[65vh] flex-1 flex-col overflow-hidden border border-zinc-800 bg-black">
-          <iframe
-            title="terminal projects"
-            src={ttydUrl}
-            className="min-h-[65vh] flex-1 bg-black"
-            allow="clipboard-read; clipboard-write"
-            referrerPolicy="no-referrer"
-          />
-        </section>
-
-        <a
-          href={ttydUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="animated-underline mt-4 w-fit text-[13px] text-zinc-500 transition hover:text-white"
-        >
-          open terminal in a new tab
-        </a>
+        <TerminalEmbed ttydUrl={ttydUrl} />
       </div>
     </main>
   );
