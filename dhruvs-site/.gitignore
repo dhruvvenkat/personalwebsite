@@ -47,3 +47,6 @@ next-env.d.ts
 src/app/content/notes/how-torrenting-works
 src/app/content/notes/sora-ending-is-good.md
 src/app/content/notes/thoughts-on-self-learning.md
+src/app/content/notes/how-i-made-a-touchscreen-terminal.md
+src/app/content/notes/streaming-client-for-codex.md
+

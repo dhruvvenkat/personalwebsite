@@ -33,14 +33,14 @@ export default function DhruvSystemsPortfolio() {
 
   const projects = [
     {
+      name: "Patchwork - an AI enhanced terminal editor",
+      link: "https://github.com/dhruvvenkat/patchwork",
+      tags: ["ide", "devtools", "experiment"]
+    },
+    {
       name: "BoilerBrain - automating boilerplate code generation with natural language",
       link: "https://github.com/dhruvvenkat/boilerbrain",
       tags: ["ai", "codegen", "tools"],
-    },
-    {
-      name: "AgentBench - agent evolution framework for the future",
-      link: "https://github.com/dhruvvenkat/agentbench",
-      tags: ["agents", "evals", "research"],
     },
     {
       name: "LoadStar - deterministic API load simulator",

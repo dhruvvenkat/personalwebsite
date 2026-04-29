@@ -84,7 +84,7 @@ export function HomeMascot() {
         className="pointer-events-auto flex flex-col items-end"
       >
         {isBubbleOpen && (
-          <div className="relative mb-4 w-[15rem] rounded-[1.75rem] bg-white px-5 py-4 text-left text-zinc-900 shadow-[0_18px_60px_rgba(255,255,255,0.18)] sm:w-[18rem]">
+          <div className="relative z-20 mb-4 w-[15rem] rounded-[1.75rem] bg-white px-5 py-4 text-left text-zinc-900 shadow-[0_18px_60px_rgba(255,255,255,0.18)] sm:w-[18rem]">
             {isLoading ? (
               <p className="min-h-[5.5rem] text-[15px] leading-6 text-zinc-500">
                 Loading...
@@ -111,15 +111,28 @@ export function HomeMascot() {
           type="button"
           onClick={handleMascotClick}
           aria-label="Show a new quote"
-          className="group cursor-pointer rounded-full transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-white/70 focus:ring-offset-2 focus:ring-offset-[#0b0d10]"
+          className="group relative isolate cursor-pointer overflow-visible rounded-full transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-white/70 focus:ring-offset-2 focus:ring-offset-[#0b0d10]"
         >
+          {/* <span className="mascot-stage" aria-hidden="true">
+            <span className="mascot-balloon">
+              <span className="mascot-balloon-shine" />
+              <span className="mascot-balloon-knot" />
+              <svg
+                className="mascot-balloon-string"
+                viewBox="0 0 96 92"
+                fill="none"
+              >
+                <path d="M14 2C28 20 10 37 24 52C39 68 70 65 84 88" />
+              </svg>
+            </span>
+          </span> */}
           <Image
             src="/icons/SP-Studio (1).png"
             alt="Caricature of Dhruv"
             width={144}
             height={144}
             priority
-            className="h-24 w-24 drop-shadow-[0_10px_30px_rgba(0,0,0,0.45)] transition duration-200 group-hover:scale-[1.02] sm:h-32 sm:w-32"
+            className="relative z-10 h-24 w-24 drop-shadow-[0_10px_30px_rgba(0,0,0,0.45)] transition duration-200 group-hover:scale-[1.02] sm:h-32 sm:w-32"
           />
         </button>
       </div>
