@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { IconType } from "react-icons";
 import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 
 import { AmbientBackground } from "./components/ambient-background";
+import { ExperienceList } from "./components/experience-list";
 import { HomeMascot } from "./components/home-mascot";
 import { Panel } from "./components/panel";
 import { ProjectRow } from "./components/project-row";
@@ -60,17 +60,23 @@ export default function DhruvSystemsPortfolio() {
       company: "red lane group (may - aug. 2026)",
       role: "engineering + ai",
       icon: "/icons/redlane-logo.svg",
+      blurb:
+        "incoming summer 2026!",
     },
 
     {
       company: "scotiabank (sep. - dec. 2025)",
       role: "engineering",
       icon: "/icons/scotiabank.svg",
+      blurb:
+        "worked on client-facing banking onboarding solutions. developed an ai-assistant to help business analysts convert customer notes into detailed project requirements.",
     },
     {
       company: "tangerine  (jan. - apr. 2025)",
       role: "devops",
       icon: "/icons/tangerine.svg",
+      blurb:
+        "helped maintain several critical Jenkins pipelines. engineered a pipeline to monitor GitHub Copilot license usage and revoke licenses as necessary ($1000+ saved).",
     },
   ];
 
@@ -157,27 +163,7 @@ export default function DhruvSystemsPortfolio() {
             </Panel>
 
             <Panel title="experience">
-              <ul className="space-y-3 text-zinc-300">
-                {experience.map((exp) => (
-                  <li
-                    key={exp.company}
-                    className="flex justify-between text-[15px]"
-                  >
-                    <span className="flex items-center gap-2.5">
-                      <Image
-                        src={exp.icon}
-                        alt=""
-                        width={14}
-                        height={14}
-                        aria-hidden="true"
-                        className="h-[14px] w-[14px] shrink-0 opacity-100"
-                      />
-                      <span>{exp.company}</span>
-                    </span>
-                    <span className="text-zinc-500">{exp.role}</span>
-                  </li>
-                ))}
-              </ul>
+              <ExperienceList items={experience} />
             </Panel>
 
             <Panel title="links">
