@@ -33,8 +33,8 @@ export default function DhruvSystemsPortfolio() {
 
   const projects = [
     {
-      name: "Patchwork - an AI enhanced terminal editor",
-      link: "https://github.com/dhruvvenkat/patchwork",
+      name: "flowstate - an AI enhanced terminal editor",
+      link: "https://github.com/dhruvvenkat/flowstate",
       tags: ["ide", "devtools", "experiment"]
     },
     {
