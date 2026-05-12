@@ -12,12 +12,105 @@ type QuoteErrorResponse = {
   error?: string;
 };
 
+type QueuedQuoteRequest = {
+  promise: Promise<Quote>;
+  status: "pending" | "fulfilled" | "rejected";
+  value?: Quote;
+};
+
+let queuedQuoteRequest: QueuedQuoteRequest | null = null;
+
+function isQuoteResponse(data: Quote | QuoteErrorResponse): data is Quote {
+  return "content" in data && "author" in data;
+}
+
+async function fetchQuote() {
+  const response = await fetch("/api/quote", {
+    cache: "no-store",
+  });
+  const data = (await response.json()) as Quote | QuoteErrorResponse;
+
+  if (!response.ok || !isQuoteResponse(data)) {
+    const errorMessage =
+      "error" in data && typeof data.error === "string"
+        ? data.error
+        : "Unable to fetch quote right now.";
+
+    throw new Error(errorMessage);
+  }
+
+  return {
+    content: data.content,
+    author: data.author,
+  };
+}
+
+function warmQuoteQueue() {
+  if (queuedQuoteRequest) {
+    return queuedQuoteRequest;
+  }
+
+  const request: QueuedQuoteRequest = {
+    status: "pending",
+    promise: fetchQuote()
+      .then((quote) => {
+        request.status = "fulfilled";
+        request.value = quote;
+
+        return quote;
+      })
+      .catch((error) => {
+        request.status = "rejected";
+
+        if (queuedQuoteRequest === request) {
+          queuedQuoteRequest = null;
+        }
+
+        throw error;
+      }),
+  };
+
+  queuedQuoteRequest = request;
+
+  return request;
+}
+
+function readReadyQueuedQuote() {
+  if (queuedQuoteRequest?.status === "fulfilled" && queuedQuoteRequest.value) {
+    const quote = queuedQuoteRequest.value;
+    queuedQuoteRequest = null;
+
+    return quote;
+  }
+
+  return null;
+}
+
+async function takeQueuedOrFreshQuote() {
+  const request = queuedQuoteRequest;
+  queuedQuoteRequest = null;
+
+  if (!request) {
+    return fetchQuote();
+  }
+
+  try {
+    return await request.promise;
+  } catch {
+    return fetchQuote();
+  }
+}
+
 export function HomeMascot() {
   const [isBubbleOpen, setIsBubbleOpen] = useState(false);
   const [quote, setQuote] = useState<Quote | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    void warmQuoteQueue().promise.catch(() => {});
+  }, []);
 
   useEffect(() => {
     if (!isBubbleOpen) {
@@ -38,33 +131,14 @@ export function HomeMascot() {
   }, [isBubbleOpen]);
 
   async function handleMascotClick() {
+    const readyQuote = readReadyQueuedQuote();
+
     setIsBubbleOpen(true);
-    setIsLoading(true);
+    setIsLoading(!readyQuote);
     setError(null);
 
     try {
-      const response = await fetch("/api/quote", {
-        cache: "no-store",
-      });
-      const data = (await response.json()) as Quote | QuoteErrorResponse;
-
-      if (
-        !response.ok ||
-        !("content" in data) ||
-        !("author" in data)
-      ) {
-        const errorMessage =
-          "error" in data && typeof data.error === "string"
-            ? data.error
-            : "Unable to fetch quote right now.";
-
-        throw new Error(errorMessage);
-      }
-
-      setQuote({
-        content: data.content,
-        author: data.author,
-      });
+      setQuote(readyQuote ?? (await takeQueuedOrFreshQuote()));
     } catch (fetchError) {
       setQuote(null);
       setError(
@@ -74,6 +148,7 @@ export function HomeMascot() {
       );
     } finally {
       setIsLoading(false);
+      void warmQuoteQueue().promise.catch(() => {});
     }
   }
 
