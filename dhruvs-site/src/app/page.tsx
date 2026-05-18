@@ -8,8 +8,10 @@ import { GitHubContributionPopover } from "./components/github-contribution-popo
 import { HomeMascot } from "./components/home-mascot";
 import { Panel } from "./components/panel";
 import { ProjectRow } from "./components/project-row";
+// import { XProfilePopover } from "./components/x-profile-popover";
 import { getGitHubContributionSummary } from "./lib/github-contributions";
 import { formatNoteDate, getAllNoteSummaries } from "./lib/notes";
+// import { getXProfileSummary } from "./lib/x-profile";
 
 export const revalidate = 21600;
 
@@ -30,6 +32,8 @@ function InfoRow({ label, value }: InfoRowProps) {
 export default async function DhruvSystemsPortfolio() {
   const githubContributionSummary =
     await getGitHubContributionSummary("dhruvvenkat");
+  // X API user lookup is paid right now. Keep this ready to re-enable later.
+  // const xProfileSummary = await getXProfileSummary("wakeupitsdhruv");
 
   const current = [
     "computer engineering @ uwaterloo",
@@ -187,6 +191,18 @@ export default async function DhruvSystemsPortfolio() {
                       />
                     );
                   }
+
+                  // X API user lookup is paid right now. Re-enable this block
+                  // once a free/viable data source is available.
+                  // if (link.label === "x") {
+                  //   return (
+                  //     <XProfilePopover
+                  //       key={link.label}
+                  //       href={link.href}
+                  //       profile={xProfileSummary}
+                  //     />
+                  //   );
+                  // }
 
                   return (
                     <a
