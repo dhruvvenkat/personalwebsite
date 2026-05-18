@@ -35,7 +35,7 @@ export default async function DhruvSystemsPortfolio() {
   const current = [
     "computer engineering @ uwaterloo",
     "aspiring polymath",
-    "exploring ML compilers, computer architecture, and performance engineering",
+    "exploring ML inference, computer architecture, and performance engineering",
     "hmu if we can cook!",
   ];
 
@@ -146,7 +146,7 @@ export default async function DhruvSystemsPortfolio() {
             <div className="grid content-start gap-4 self-end text-sm">
               <InfoRow
                 label="focus"
-                value="ml compilers · systems · architecture"
+                value="ml inference · systems · devtooling"
               />
               <InfoRow label="location" value="Waterloo / Toronto / Calgary" />
               <InfoRow
