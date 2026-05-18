@@ -1,13 +1,17 @@
 import Link from "next/link";
 import type { IconType } from "react-icons";
-import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 
 import { AmbientBackground } from "./components/ambient-background";
 import { ExperienceList } from "./components/experience-list";
+import { GitHubContributionPopover } from "./components/github-contribution-popover";
 import { HomeMascot } from "./components/home-mascot";
 import { Panel } from "./components/panel";
 import { ProjectRow } from "./components/project-row";
+import { getGitHubContributionSummary } from "./lib/github-contributions";
 import { formatNoteDate, getAllNoteSummaries } from "./lib/notes";
+
+export const revalidate = 21600;
 
 type InfoRowProps = {
   label: string;
@@ -23,7 +27,10 @@ function InfoRow({ label, value }: InfoRowProps) {
   );
 }
 
-export default function DhruvSystemsPortfolio() {
+export default async function DhruvSystemsPortfolio() {
+  const githubContributionSummary =
+    await getGitHubContributionSummary("dhruvvenkat");
+
   const current = [
     "computer engineering @ uwaterloo",
     "aspiring polymath",
@@ -84,7 +91,6 @@ export default function DhruvSystemsPortfolio() {
     {
       label: "github",
       href: "https://github.com/dhruvvenkat",
-      icon: FaGithub,
     },
     {
       label: "linkedin",
@@ -171,6 +177,16 @@ export default function DhruvSystemsPortfolio() {
                 {links.map((link) => {
                   const opensInNewTab =
                     link.href.startsWith("http") || link.href.endsWith(".pdf");
+
+                  if (link.label === "github") {
+                    return (
+                      <GitHubContributionPopover
+                        key={link.label}
+                        href={link.href}
+                        summary={githubContributionSummary}
+                      />
+                    );
+                  }
 
                   return (
                     <a
