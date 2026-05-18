@@ -54,10 +54,10 @@ export function GitHubContributionPopover({
 
       <span
         data-github-contribution-popover
-        className="pointer-events-none absolute bottom-full left-0 z-50 mb-3 inline-block translate-y-1 opacity-0 transition duration-200 ease-out group-focus-within/github:translate-y-0 group-focus-within/github:opacity-100 group-hover/github:translate-y-0 group-hover/github:opacity-100"
+        className="pointer-events-none absolute bottom-full left-1/2 z-50 mb-3 inline-block -translate-x-1/2 translate-y-1 opacity-0 transition duration-200 ease-out group-focus-within/github:translate-y-0 group-focus-within/github:opacity-100 group-hover/github:translate-y-0 group-hover/github:opacity-100"
       >
         <span className="relative block rounded-md border border-zinc-800 bg-[#090b0d]/95 px-3 py-2.5 shadow-2xl shadow-black/40 ring-1 ring-white/5 backdrop-blur">
-          <span className="absolute -bottom-1 left-[9px] h-2 w-2 rotate-45 border-b border-r border-zinc-800 bg-[#090b0d]" />
+          <span className="absolute -bottom-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 border-b border-r border-zinc-800 bg-[#090b0d]" />
 
           {summary ? (
             <>
