@@ -121,8 +121,8 @@ export default async function DhruvSystemsPortfolio() {
       <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center px-6 py-10 sm:px-10 sm:py-14 lg:px-16 lg:py-20">
         {/* HEADER */}
         <header className="mb-4 pb-5">
-          <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
-            <div>
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
+            <div className="max-w-md">
               {/* <p className="mb-3 text-[11px] uppercase tracking-[0.25em] text-zinc-500">
                 ml compilers · systems · architecture
               </p> */}
@@ -131,7 +131,7 @@ export default async function DhruvSystemsPortfolio() {
                 dhruv venkat
               </h1>
 
-              <p className="mt-6 max-w-xl text-[15px] leading-7 text-zinc-400">
+              <p className="mt-6 text-[15px] leading-7 text-zinc-400">
                 building software focused on clarity, fast iteration, and tools
                 that make engineering work sharper.{" "}
                 <em>
