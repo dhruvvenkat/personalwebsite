@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { PointerTrail } from "./components/pointer-trail";
 import { ThemeToggle } from "./components/theme-toggle";
 
 const themeInitializerScript = `
@@ -66,7 +65,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <PointerTrail />
         <ThemeToggle />
         {children}
         <Analytics />
