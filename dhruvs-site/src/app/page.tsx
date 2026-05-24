@@ -41,6 +41,11 @@ export default async function DhruvSystemsPortfolio() {
 
   const projects = [
     {
+      name: "linkdrop - send links between your phone and your PC over LAN",
+      link: "https://github.com/dhruvvenkat/linkdrop",
+      tags: ["networking", "systems", "foundations"],
+    },
+    {
       name: "flowstate - an AI enhanced terminal editor",
       link: "https://github.com/dhruvvenkat/flowstate",
       tags: ["ide", "devtools", "experiment"]
@@ -49,11 +54,6 @@ export default async function DhruvSystemsPortfolio() {
       name: "BoilerBrain - automating boilerplate code generation with natural language",
       link: "https://github.com/dhruvvenkat/boilerbrain",
       tags: ["ai", "codegen", "tools"],
-    },
-    {
-      name: "LoadStar - deterministic API load simulator",
-      link: "https://github.com/dhruvvenkat/loadstar",
-      tags: ["systems", "api", "testing"],
     },
   ];
 
