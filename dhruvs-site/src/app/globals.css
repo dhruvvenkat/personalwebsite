@@ -57,7 +57,7 @@ main {
 }
 
 main::before {
-  /* CSS-only grain. It sits above the page background/glows and below z-10 content.
+  /* CSS-only grain. It sits above the page background and below z-10 content.
      Tune down: lower --grain-opacity or increase --grain-size-*.
      Tune up: raise --grain-opacity slightly or reduce --grain-size-*. */
   content: "";
@@ -460,55 +460,7 @@ html[data-theme="light"] .pointer-fluid-layer {
   opacity: 0.58;
 }
 
-@keyframes ambient-drift-slate {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(6%, -4%, 0) scale(1.04);
-  }
-  100% {
-    transform: translate3d(12%, 3%, 0) scale(1.02);
-  }
-}
-
-@keyframes ambient-drift-amber {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(-7%, 5%, 0) scale(1.05);
-  }
-  100% {
-    transform: translate3d(-12%, -3%, 0) scale(1.02);
-  }
-}
-
-.ambient-glow {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(105px);
-  will-change: transform;
-}
-
-.ambient-glow-slate {
-  background:
-    radial-gradient(circle at 34% 36%, rgba(96, 112, 148, 0.25) 0%, rgba(71, 84, 112, 0.14) 36%, rgba(23, 28, 37, 0.03) 58%, rgba(23, 28, 37, 0) 76%);
-  animation: ambient-drift-slate 36s ease-in-out infinite alternate;
-}
-
-.ambient-glow-amber {
-  background:
-    radial-gradient(circle at 62% 40%, rgba(128, 98, 68, 0.21) 0%, rgba(88, 66, 46, 0.12) 36%, rgba(24, 20, 17, 0.025) 58%, rgba(24, 20, 17, 0) 76%);
-  animation: ambient-drift-amber 44s ease-in-out infinite alternate;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .ambient-glow-slate,
-  .ambient-glow-amber {
-    animation: none;
-  }
-
   .pointer-fluid-layer {
     display: none;
   }
