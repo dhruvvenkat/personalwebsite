@@ -14,20 +14,6 @@ import { formatNoteDate, getAllNoteSummaries } from "./lib/notes";
 
 export const revalidate = 21600;
 
-type InfoRowProps = {
-  label: string;
-  value: string;
-};
-
-function InfoRow({ label, value }: InfoRowProps) {
-  return (
-    <div className="grid grid-cols-[80px_1fr] gap-3 border-b border-zinc-800 pb-2 text-[15px]">
-      <span className="text-zinc-500">{label}</span>
-      <span className="text-zinc-300">{value}</span>
-    </div>
-  );
-}
-
 export default async function DhruvSystemsPortfolio() {
   const githubContributionSummary =
     await getGitHubContributionSummary("dhruvvenkat");
@@ -121,39 +107,14 @@ export default async function DhruvSystemsPortfolio() {
       <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center px-6 py-10 sm:px-10 sm:py-14 lg:px-16 lg:py-20">
         {/* HEADER */}
         <header className="mb-4 pb-5">
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
-            <div className="max-w-md">
-              {/* <p className="mb-3 text-[11px] uppercase tracking-[0.25em] text-zinc-500">
-                ml compilers · systems · architecture
-              </p> */}
+          <div className="max-w-3xl">
+            {/* <p className="mb-3 text-[11px] uppercase tracking-[0.25em] text-zinc-500">
+              ml compilers · systems · architecture
+            </p> */}
 
-              <h1 className="text-4xl font-light tracking-tight text-white sm:text-6xl">
-                dhruv venkat
-              </h1>
-
-              <p className="mt-6 text-[15px] leading-7 text-zinc-400">
-                building software focused on clarity, fast iteration, and tools
-                that make engineering work sharper.{" "}
-                <em>
-                  <b>
-                    i&apos;m always open to new opportunities to meet cool
-                    people and build awesome stuff.
-                  </b>
-                </em>
-              </p>
-            </div>
-
-            <div className="grid content-start gap-4 self-end text-sm">
-              <InfoRow
-                label="focus"
-                value="ml inference · systems · devtooling"
-              />
-              <InfoRow label="location" value="Waterloo / Toronto / Calgary" />
-              <InfoRow
-                label="status"
-                value="building, experimenting, shipping"
-              />
-            </div>
+            <h1 className="text-4xl font-light tracking-tight text-white sm:text-6xl">
+              dhruv venkat
+            </h1>
           </div>
         </header>
 
