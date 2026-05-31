@@ -119,9 +119,9 @@ export default async function DhruvSystemsPortfolio() {
         </header>
 
         {/* MAIN GRID */}
-        <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           {/* LEFT RAIL */}
-          <aside className="space-y-12 lg:sticky lg:top-12 lg:h-fit">
+          <aside className="space-y-7 lg:sticky lg:top-12 lg:h-fit">
             <Panel title="current">
               <ul className="space-y-3 text-[15px] leading-7 text-zinc-300">
                 {current.map((item) => (
@@ -184,7 +184,7 @@ export default async function DhruvSystemsPortfolio() {
           </aside>
 
           {/* RIGHT CONTENT */}
-          <section className="space-y-14 lg:space-y-8">
+          <section className="space-y-7 lg:space-y-6">
             <Panel title="latest notes">
               <div className="space-y-6">
                 {pinnedNote && (

@@ -40,7 +40,7 @@ export default function NotesIndexPage() {
           </div>
         </header>
 
-        <div className="space-y-7">
+        <div className="space-y-5">
           {pinnedNotes.length > 0 && (
             <Panel title="featured">
               <div className="space-y-4">
