@@ -125,7 +125,9 @@ export default async function DhruvSystemsPortfolio() {
             <Panel title="current">
               <ul className="space-y-3 text-[15px] leading-7 text-zinc-300">
                 {current.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item}>
+                    {item === current[current.length - 1] ? <strong>{item}</strong> : item}
+                  </li>
                 ))}
               </ul>
             </Panel>
