@@ -33,10 +33,10 @@ export default function NotesIndexPage() {
               </h1>
             </div>
 
-            <p className="max-w-md text-[15px] leading-7 text-zinc-400 lg:pt-8">
+            {/* <p className="max-w-md text-[15px] leading-7 text-zinc-400 lg:pt-8">
               Short writing on AI-native engineering, systems, and the product
               decisions that shape dependable software.
-            </p>
+            </p> */}
           </div>
         </header>
 
