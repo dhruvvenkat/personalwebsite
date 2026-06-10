@@ -55,7 +55,7 @@ export default async function DhruvSystemsPortfolio() {
       role: "engineering + ai",
       icon: "/icons/redlane-logo.svg",
       blurb:
-        "incoming summer 2026!",
+        "built an end-to-end pipeline to automate basic triage and investigation for support agents. working on a transcription system to capture audio of internal + external calls and summarize them with AI",
     },
 
     {
