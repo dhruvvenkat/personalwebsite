@@ -13,6 +13,13 @@ type GitHubContributionPopoverProps = {
 const DAYS_PER_COLUMN = 5;
 const COLUMN_COUNT = 12;
 const DISPLAYED_DAY_COUNT = DAYS_PER_COLUMN * COLUMN_COUNT;
+const CONTRIBUTION_COLORS: Record<string, string> = {
+  NONE: "#161b22",
+  FIRST_QUARTILE: "#0e4429",
+  SECOND_QUARTILE: "#006d32",
+  THIRD_QUARTILE: "#26a641",
+  FOURTH_QUARTILE: "#39d353",
+};
 
 function formatDayLabel(day: GitHubContributionDay) {
   const formatter = new Intl.DateTimeFormat("en", {
@@ -76,7 +83,9 @@ export function GitHubContributionPopover({
                     title={formatDayLabel(day)}
                     className="h-2.5 w-2.5 rounded-[2px] bg-zinc-900 ring-1 ring-white/5"
                     style={{
-                      backgroundColor: day.count > 0 ? day.color : "#18181b",
+                      backgroundColor:
+                        CONTRIBUTION_COLORS[day.level] ??
+                        CONTRIBUTION_COLORS.NONE,
                     }}
                   />
                 ))}

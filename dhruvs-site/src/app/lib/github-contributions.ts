@@ -1,7 +1,6 @@
 export type GitHubContributionDay = {
   date: string;
   count: number;
-  color: string;
   level: string;
 };
 
@@ -16,7 +15,6 @@ export type GitHubContributionSummary = {
 };
 
 type GraphQLContributionDay = {
-  color: string;
   contributionCount: number;
   contributionLevel: string;
   date: string;
@@ -53,7 +51,6 @@ const contributionCalendarQuery = `
           totalContributions
           weeks {
             contributionDays {
-              color
               contributionCount
               contributionLevel
               date
@@ -77,7 +74,6 @@ function normalizeWeek(week: GraphQLContributionWeek): GitHubContributionWeek {
     days[day.weekday] = {
       date: day.date,
       count: day.contributionCount,
-      color: day.color,
       level: day.contributionLevel,
     };
   }
