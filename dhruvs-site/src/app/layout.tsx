@@ -2,21 +2,6 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeToggle } from "./components/theme-toggle";
-
-const themeInitializerScript = `
-(() => {
-  try {
-    const theme = window.sessionStorage.getItem("dhruvs-site-theme");
-
-    if (theme === "light" || theme === "dark") {
-      document.documentElement.dataset.theme = theme;
-      document.documentElement.style.colorScheme = theme;
-    }
-  } catch {
-  }
-})();
-`;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -56,16 +41,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="dark" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{ __html: themeInitializerScript }}
-        />
-      </head>
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeToggle />
         {children}
         <Analytics />
       </body>
