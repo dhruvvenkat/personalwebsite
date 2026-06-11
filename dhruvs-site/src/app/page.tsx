@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { IconType } from "react-icons";
-import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import { FaEnvelope, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 
 import { AmbientBackground } from "./components/ambient-background";
 import { ExperienceList } from "./components/experience-list";
@@ -44,10 +44,7 @@ export default async function DhruvSystemsPortfolio() {
   ];
 
   const allNotes = getAllNoteSummaries();
-  const pinnedNote = allNotes.find((note) => note.pinned);
-  const recentNotes = pinnedNote
-    ? allNotes.filter((note) => note.slug !== pinnedNote.slug).slice(0, 2)
-    : allNotes.slice(0, 3);
+  const recentNotes = allNotes.filter((note) => !note.pinned).slice(0, 4);
 
   const experience = [
     {
@@ -89,7 +86,7 @@ export default async function DhruvSystemsPortfolio() {
       href: "https://x.com/wakeupitsdhruv",
       icon: FaXTwitter,
     },
-    { label: "email", href: "mailto:dvenkat@uwaterloo.ca" },
+    { label: "email", href: "mailto:dvenkat@uwaterloo.ca", icon: FaEnvelope },
     { label: "résumé", href: "/dhruv-venkat-resume.pdf" },
     { label: "pieces", href: "/pieces" },
     { label: "ssh.dhruvvenkat.com", href: "/terminal" },
@@ -137,7 +134,7 @@ export default async function DhruvSystemsPortfolio() {
             </Panel>
 
             <Panel title="links">
-              <div className="flex flex-wrap gap-x-5 gap-y-2 text-[15px] text-zinc-400">
+              <div className="flex flex-wrap gap-x-4 gap-y-2 text-[15px] text-zinc-400">
                 {links.map((link) => {
                   const opensInNewTab =
                     link.href.startsWith("http") || link.href.endsWith(".pdf");
@@ -188,58 +185,38 @@ export default async function DhruvSystemsPortfolio() {
           {/* RIGHT CONTENT */}
           <section className="space-y-7 lg:space-y-6">
             <Panel title="latest notes">
-              <div className="space-y-6">
-                {pinnedNote && (
+              <div className="space-y-3 lg:pb-2">
+                {recentNotes.map((note) => (
                   <Link
-                    href={`/notes/${pinnedNote.slug}`}
-                    className="group block rounded-2xl border-2 border-zinc-800 bg-zinc-950/30 px-5 py-4 transition hover:border-zinc-700 hover:bg-zinc-950/50"
+                    key={note.slug}
+                    href={`/notes/${note.slug}`}
+                    className="group grid grid-cols-[88px_minmax(0,1fr)] items-baseline gap-3 transition sm:grid-cols-[112px_minmax(0,1fr)] sm:gap-5"
                   >
-                    <div className="mb-3 flex items-center justify-between gap-4">
-                      <span className="text-[11px] uppercase tracking-[0.22em] text-zinc-500 transition group-hover:text-zinc-400">
-                        Start here
-                      </span>
-                      <span className="text-[11px] uppercase tracking-[0.2em] text-zinc-600 transition group-hover:text-zinc-500">
-                        {formatNoteDate(pinnedNote.date)}
-                      </span>
-                    </div>
-
-                    <span className="animated-underline inline text-[16px] leading-7 text-zinc-200 transition group-hover:text-white">
-                      {pinnedNote.title}
+                    <span className="text-[11px] uppercase tracking-[0.2em] text-zinc-600 transition group-hover:text-zinc-500">
+                      {formatNoteDate(note.date)}
                     </span>
-                  </Link>
-                )}
-
-                <div className="divide-y divide-zinc-800 border-y border-zinc-800">
-                  {recentNotes.map((note) => (
-                    <Link
-                      key={note.slug}
-                      href={`/notes/${note.slug}`}
-                      className="group grid gap-2 py-4 transition sm:grid-cols-[88px_1fr]"
-                    >
-                      <span className="text-[11px] uppercase tracking-[0.2em] text-zinc-600 transition group-hover:text-zinc-500">
-                        {formatNoteDate(note.date)}
-                      </span>
+                    <span className="flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1">
                       <span className="animated-underline w-fit text-[15px] leading-6 text-zinc-300 transition group-hover:text-white">
                         {note.title}
                       </span>
-                    </Link>
-                  ))}
-
-                  <Link
-                    href="/notes"
-                    className="group grid gap-2 py-4 transition sm:grid-cols-[88px_1fr]"
-                  >
-                    <span className="text-[11px] uppercase tracking-[0.2em] text-zinc-600 transition group-hover:text-zinc-500">
-                      archive
-                    </span>
-                    <span className="flex items-center justify-between gap-4 text-[15px] leading-6 text-zinc-400 transition group-hover:text-white">
-                      <span className="animated-underline">more notes</span>
-                      <span className="text-zinc-600 transition group-hover:translate-x-0.5 group-hover:text-zinc-500">
-                        -&gt;
-                      </span>
                     </span>
                   </Link>
-                </div>
+                ))}
+
+                <Link
+                  href="/notes"
+                  className="group grid grid-cols-[88px_minmax(0,1fr)] items-baseline gap-3 pt-1 transition sm:grid-cols-[112px_minmax(0,1fr)] sm:gap-5"
+                >
+                  <span className="text-[11px] uppercase tracking-[0.2em] text-zinc-600 transition group-hover:text-zinc-500">
+                    archive
+                  </span>
+                  <span className="flex items-center justify-between gap-4 text-[15px] leading-6 text-zinc-400 transition group-hover:text-white">
+                    <span className="animated-underline">all notes</span>
+                    <span className="text-zinc-600 transition group-hover:translate-x-0.5 group-hover:text-zinc-500">
+                      -&gt;
+                    </span>
+                  </span>
+                </Link>
               </div>
             </Panel>
 
