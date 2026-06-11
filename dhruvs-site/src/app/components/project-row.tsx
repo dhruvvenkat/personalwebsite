@@ -11,7 +11,7 @@ export function ProjectRow({ name, href, tags }: ProjectRowProps) {
     <li>
       <a
         href={href}
-        className="project-row group block py-1.5 text-[15px] leading-7 text-zinc-300 transition hover:text-white"
+        className="project-row group block py-1.5 text-[15px] text-zinc-300 transition hover:text-white"
       >
         <span className="animated-underline inline">{name}</span>
 

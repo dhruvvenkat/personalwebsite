@@ -126,7 +126,7 @@ export default async function DhruvSystemsPortfolio() {
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           {/* LEFT RAIL */}
           <aside className="space-y-7 lg:sticky lg:top-12 lg:h-fit">
-            <Panel title="current">
+            <Panel title="about me">
               <ul className="space-y-3 text-[15px] leading-7 text-zinc-300">
                 {current.map((item) => (
                   <li key={item}>
