@@ -126,7 +126,7 @@ export default async function DhruvSystemsPortfolio() {
       <AmbientBackground />
       <HomeMascot />
 
-      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center px-6 py-10 sm:px-10 sm:py-14 lg:px-16 lg:py-20">
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center px-6 py-10 sm:px-10 sm:py-14 lg:px-16 lg:py-20 xl:w-fit">
         {/* HEADER */}
         <header className="mb-4 pb-5">
           <div className="max-w-3xl">
@@ -141,7 +141,7 @@ export default async function DhruvSystemsPortfolio() {
         </header>
 
         {/* MAIN GRID */}
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 xl:grid-cols-[428px_max-content]">
           {/* LEFT RAIL */}
           <aside className="space-y-7 lg:sticky lg:top-12 lg:h-fit">
             <Panel title="about me">
@@ -232,7 +232,7 @@ export default async function DhruvSystemsPortfolio() {
           </aside>
 
           {/* RIGHT CONTENT */}
-          <section className="space-y-7 lg:space-y-6">
+          <section className="w-fit max-w-full space-y-7 lg:space-y-6">
             <Panel title="latest notes">
               <div className="space-y-3 lg:pb-2">
                 {recentNotes.map((note) => (
