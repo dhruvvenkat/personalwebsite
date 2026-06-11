@@ -151,15 +151,22 @@ export default async function DhruvSystemsPortfolio() {
                     {item === current[0] ? (
                       <span className="inline-flex items-center gap-2">
                         <span>computer engineering @</span>
-                        <Image
-                          src="/icons/uwaterloo-logo.svg"
-                          alt=""
-                          width={14}
-                          height={14}
-                          aria-hidden="true"
-                          className="h-[14px] w-[14px] shrink-0 translate-y-px"
-                        />
-                        <span>uwaterloo</span>
+                        <a
+                          href="https://uwaterloo.ca/electrical-computer-engineering/"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="animated-underline inline-flex items-center gap-2 transition hover:text-white"
+                        >
+                          <Image
+                            src="/icons/uwaterloo-logo.svg"
+                            alt=""
+                            width={14}
+                            height={14}
+                            aria-hidden="true"
+                            className="h-[14px] w-[14px] shrink-0 translate-y-px"
+                          />
+                          <span>uwaterloo</span>
+                        </a>
                       </span>
                     ) : item === current[current.length - 1] ? (
                       <strong>{item}</strong>
