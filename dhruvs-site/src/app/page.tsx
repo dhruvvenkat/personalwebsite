@@ -275,7 +275,7 @@ export default async function DhruvSystemsPortfolio() {
               </ul>
             </Panel>
 
-            <Panel title="what im reading">
+            <Panel title="what i'm reading">
               <ul className="flex flex-wrap gap-4">
                 {books.map((book) => (
                   <li key={book.title}>
