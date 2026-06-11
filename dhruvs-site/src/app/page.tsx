@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { IconType } from "react-icons";
 import { FaEnvelope, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
@@ -129,7 +130,24 @@ export default async function DhruvSystemsPortfolio() {
               <ul className="space-y-3 text-[15px] leading-7 text-zinc-300">
                 {current.map((item) => (
                   <li key={item}>
-                    {item === current[current.length - 1] ? <strong>{item}</strong> : item}
+                    {item === current[0] ? (
+                      <span className="inline-flex items-center gap-2">
+                        <span>computer engineering @</span>
+                        <Image
+                          src="/icons/uwaterloo-logo.svg"
+                          alt=""
+                          width={14}
+                          height={14}
+                          aria-hidden="true"
+                          className="h-[14px] w-[14px] shrink-0 translate-y-px"
+                        />
+                        <span>uwaterloo</span>
+                      </span>
+                    ) : item === current[current.length - 1] ? (
+                      <strong>{item}</strong>
+                    ) : (
+                      item
+                    )}
                   </li>
                 ))}
               </ul>
