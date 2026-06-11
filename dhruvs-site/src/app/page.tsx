@@ -183,7 +183,7 @@ export default async function DhruvSystemsPortfolio() {
             </Panel>
 
             <Panel title="links">
-              <div className="flex flex-wrap gap-x-4 gap-y-2 text-[15px] text-zinc-400">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[15px] leading-[18px] text-zinc-400 xl:flex-nowrap">
                 {links.map((link) => {
                   const opensInNewTab =
                     link.href.startsWith("http") || link.href.endsWith(".pdf");
