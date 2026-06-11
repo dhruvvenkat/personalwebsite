@@ -42,16 +42,34 @@ export default async function DhruvSystemsPortfolio() {
       link: "https://github.com/dhruvvenkat/flowstate",
       tags: ["ide", "devtools", "experiment"]
     },
-    {
-      name: "BoilerBrain - automating boilerplate code generation with natural language",
-      link: "https://github.com/dhruvvenkat/boilerbrain",
-      tags: ["ai", "codegen", "tools"],
-    },
+  ];
 
+  const books = [
+    {
+      title: "Write Great Code, Volume 1",
+      cover: "/covers/write-great-code-v1-cover.jpg",
+      link: "https://a.co/d/05FSjMo1",
+      width: 1135,
+      height: 1500,
+    },
+    {
+      title: "Operating Systems: Three Easy Pieces",
+      cover: "/covers/os-3-easy-pieces-cover.jpg",
+      link: "https://a.co/d/00hbxntM",
+      width: 1000,
+      height: 1499,
+    },
+    {
+      title: "The Partnership: The Making of Goldman Sachs",
+      cover: "/covers/the-partnership-cover.jpg",
+      link: "https://a.co/d/072QM4hU",
+      width: 1135,
+      height: 1500,
+    },
   ];
 
   const allNotes = getAllNoteSummaries();
-  const recentNotes = allNotes.filter((note) => !note.pinned).slice(0, 4);
+  const recentNotes = allNotes.filter((note) => !note.pinned).slice(0, 2);
 
   const experience = [
     {
@@ -253,6 +271,30 @@ export default async function DhruvSystemsPortfolio() {
                     href={project.link}
                     tags={project.tags}
                   />
+                ))}
+              </ul>
+            </Panel>
+
+            <Panel title="what im reading">
+              <ul className="flex flex-wrap gap-4">
+                {books.map((book) => (
+                  <li key={book.title}>
+                    <a
+                      href={book.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`View ${book.title}`}
+                      className="group block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-zinc-500"
+                    >
+                      <Image
+                        src={book.cover}
+                        alt={`${book.title} book cover`}
+                        width={book.width}
+                        height={book.height}
+                        className="h-32 w-auto rounded-sm border border-zinc-800 object-contain transition duration-200 ease-out group-hover:scale-105 group-hover:border-zinc-600 group-focus-visible:scale-105 group-focus-visible:border-zinc-600"
+                      />
+                    </a>
+                  </li>
                 ))}
               </ul>
             </Panel>
