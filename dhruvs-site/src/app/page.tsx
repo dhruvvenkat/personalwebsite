@@ -27,9 +27,14 @@ export default async function DhruvSystemsPortfolio() {
 
   const projects = [
     {
+      name: "UW Orbital design team - making firmware for mini satellites",
+      link: "https://github.com/UWOrbital",
+      tags: ["firmware", "embedded", "performance"]
+    },
+    {
       name: "linkdrop - send links between your phone and your PC over LAN",
       link: "https://github.com/dhruvvenkat/linkdrop",
-      tags: ["networking", "systems", "foundations"],
+      tags: ["networking", "systems", "linux"],
     },
     {
       name: "flowstate - an AI enhanced terminal editor",
@@ -41,6 +46,7 @@ export default async function DhruvSystemsPortfolio() {
       link: "https://github.com/dhruvvenkat/boilerbrain",
       tags: ["ai", "codegen", "tools"],
     },
+
   ];
 
   const allNotes = getAllNoteSummaries();
