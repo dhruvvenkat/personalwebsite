@@ -15,7 +15,7 @@ export function ProjectRow({ name, href, tags }: ProjectRowProps) {
       >
         <span className="animated-underline inline">{name}</span>
 
-        {/* Desktop reserves drawer space on hover, so long titles can wrap in one step. */}
+        {/* Desktop tags are overlaid so hover does not reflow the project list. */}
         <span className="project-tags-slot" aria-label={`Tags for ${name}`}>
           <span className="project-tags-drawer">
             {tags.map((tag, index) => (

@@ -240,7 +240,7 @@ main::before {
   max-width: none;
   flex-wrap: wrap;
   gap: 0.375rem;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .project-tag {
@@ -259,46 +259,57 @@ main::before {
 
 @media (min-width: 640px) {
   .project-row {
+    z-index: 0;
     transition: color 160ms ease;
   }
 
   .project-row:hover,
   .project-row:focus-visible {
-    /* Reserve the tag drawer space immediately, so long titles wrap in one step. */
-    padding-right: var(--project-tag-reveal-width);
+    z-index: 20;
   }
 
   .project-tags-slot {
     position: absolute;
     top: 50%;
-    right: 0;
+    left: calc(100% + 0.75rem);
     width: var(--project-tag-reveal-width);
-    justify-content: flex-end;
-    overflow: hidden;
+    justify-content: flex-start;
+    overflow: visible;
     pointer-events: none;
     transform: translateY(-50%);
   }
 
   .project-tags-drawer {
-    /* The absolute drawer is clipped to zero width, then peels out from the row edge. */
     position: relative;
     z-index: 1;
+    width: max-content;
     max-width: 0;
     flex-wrap: nowrap;
-    justify-content: flex-end;
-    transition: max-width var(--project-tag-reveal-duration) var(--project-tag-ease);
+    justify-content: flex-start;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateX(-0.45rem);
+    transition:
+      max-width var(--project-tag-reveal-duration) var(--project-tag-ease),
+      opacity 160ms ease,
+      transform var(--project-tag-motion-duration) var(--project-tag-ease);
+    will-change: max-width, opacity, transform;
   }
 
   .project-row:hover .project-tags-drawer,
   .project-row:focus-visible .project-tags-drawer {
     max-width: var(--project-tag-reveal-width);
+    opacity: 1;
+    transform: translateX(0);
   }
 
   .project-tag {
     position: relative;
     z-index: 1;
-    transform: translateX(0.45rem);
+    opacity: 0;
+    transform: translateX(-0.35rem);
     transition:
+      opacity 160ms ease,
       transform var(--project-tag-motion-duration) var(--project-tag-ease),
       border-color 160ms ease,
       color 160ms ease;
@@ -307,6 +318,7 @@ main::before {
 
   .project-row:hover .project-tag,
   .project-row:focus-visible .project-tag {
+    opacity: 1;
     transform: translateX(0);
   }
 }
