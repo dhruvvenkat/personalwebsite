@@ -30,17 +30,17 @@ export default async function DhruvSystemsPortfolio() {
     {
       name: "UW Orbital design team - making firmware for mini satellites",
       link: "https://github.com/UWOrbital",
-      tags: ["firmware", "embedded", "performance"]
+      tags: ["firmware", "embedded", "performance"],
     },
     {
-      name: "linkdrop - send links between your phone and your PC over LAN",
-      link: "https://github.com/dhruvvenkat/linkdrop",
-      tags: ["networking", "systems", "linux"],
+      name: "DynamEQ - an adaptive EQ tuner that changes based on your song",
+      link: "https://github.com/dhruvvenkat/dynameq",
+      tags: ["systems", "linux", "audio"],
     },
     {
       name: "flowstate - an AI enhanced terminal editor",
       link: "https://github.com/dhruvvenkat/flowstate",
-      tags: ["ide", "devtools", "experiment"]
+      tags: ["ide", "devtools", "experiment"],
     },
   ];
 
