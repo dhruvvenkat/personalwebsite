@@ -60,6 +60,14 @@ export default async function DhruvSystemsPortfolio() {
       height: 1499,
     },
     {
+      title: "Programming Embedded Systems",
+      cover: "/covers/programming-embedded-systems-cover.jpg",
+      link: "https://www.oreilly.com/library/view/programming-embedded-systems/0596009836/",
+      width: 1000,
+      height: 1499,
+    },
+
+    {
       title: "The Partnership: The Making of Goldman Sachs",
       cover: "/covers/the-partnership-cover.jpg",
       link: "https://a.co/d/072QM4hU",
