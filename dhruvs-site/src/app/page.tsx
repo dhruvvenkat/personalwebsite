@@ -134,7 +134,7 @@ export default async function DhruvSystemsPortfolio() {
               ml compilers · systems · architecture
             </p> */}
 
-            <h1 className="text-4xl font-light tracking-tight text-white sm:text-6xl">
+            <h1 className="-ml-[3px] text-4xl font-light tracking-tight text-white sm:text-6xl">
               dhruv venkat
             </h1>
           </div>
