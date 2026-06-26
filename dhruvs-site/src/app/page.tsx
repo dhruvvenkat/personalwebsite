@@ -23,7 +23,7 @@ export default async function DhruvSystemsPortfolio() {
     "computer engineering @ uwaterloo",
     "aspiring polymath",
     "exploring AI inference, computer architecture, and performance engineering",
-    "seeking winter 2027 internships in AI inference/optimization!",
+    "seeking winter 2027 internships in low-level programming!",
   ];
 
   const projects = [
